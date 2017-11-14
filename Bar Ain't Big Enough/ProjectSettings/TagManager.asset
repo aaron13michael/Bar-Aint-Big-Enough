@@ -6,6 +6,9 @@ TagManager:
   tags:
   - BottomCollider
   - Bottle
+  - Player1
+  - Player2
+  - Throwable
   layers:
   - Default
   - TransparentFX
