@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3637634}
   m_Layer: 0
   m_Name: Left Wall
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,7 +230,7 @@ Transform:
   m_LocalScale: {x: 183.64001, y: 1382.5948, z: 157.33565}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &19561999
 GameObject:
@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 19562002}
   - component: {fileID: 19562001}
   - component: {fileID: 19562000}
+  - component: {fileID: 19562004}
   m_Layer: 0
   m_Name: Bottle (2)
   m_TagString: Bottle
@@ -359,8 +360,22 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &19562004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 19561999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &65143195
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +387,7 @@ GameObject:
   - component: {fileID: 65143198}
   - component: {fileID: 65143197}
   - component: {fileID: 65143196}
+  - component: {fileID: 65143200}
   m_Layer: 0
   m_Name: Bottle (1)
   m_TagString: Bottle
@@ -488,8 +504,22 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &65143200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65143195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &106907036
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,9 +773,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemForce: 500
+  direction: 0
   playerNum: 1
   moveSpeed: 0.1
-  healthSprite: {fileID: 0}
 --- !u!1 &214095468
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +789,7 @@ GameObject:
   - component: {fileID: 214095469}
   m_Layer: 0
   m_Name: Right Wall
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -864,7 +894,7 @@ Transform:
   m_LocalScale: {x: 183.64001, y: 1382.5948, z: 157.33565}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260496039
 GameObject:
@@ -877,6 +907,7 @@ GameObject:
   - component: {fileID: 260496042}
   - component: {fileID: 260496041}
   - component: {fileID: 260496040}
+  - component: {fileID: 260496044}
   m_Layer: 0
   m_Name: Bottle (9)
   m_TagString: Bottle
@@ -995,6 +1026,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &260496044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 260496039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &375559428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1051,7 @@ GameObject:
   - component: {fileID: 375559431}
   - component: {fileID: 375559430}
   - component: {fileID: 375559429}
+  - component: {fileID: 375559433}
   m_Layer: 0
   m_Name: Bottle (5)
   m_TagString: Bottle
@@ -1124,6 +1170,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &375559433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375559428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &383326646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,6 +1195,7 @@ GameObject:
   - component: {fileID: 383326648}
   - component: {fileID: 383326647}
   - component: {fileID: 383326650}
+  - component: {fileID: 383326651}
   m_Layer: 0
   m_Name: Bottle
   m_TagString: Bottle
@@ -1231,7 +1292,7 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &383326650
 Rigidbody2D:
@@ -1253,6 +1314,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &383326651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 383326646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &430813115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,6 +1412,7 @@ GameObject:
   - component: {fileID: 461986914}
   - component: {fileID: 461986913}
   - component: {fileID: 461986912}
+  - component: {fileID: 461986916}
   m_Layer: 0
   m_Name: Bottle (4)
   m_TagString: Bottle
@@ -1455,6 +1531,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &461986916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 461986911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &491543088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,7 +1558,7 @@ GameObject:
   - component: {fileID: 491543089}
   m_Layer: 0
   m_Name: Right Platform
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1573,7 +1663,7 @@ Transform:
   m_LocalScale: {x: 633.561, y: 44.419353, z: 157.33565}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550193265
 GameObject:
@@ -1653,7 +1743,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &700783341
 GameObject:
@@ -1666,6 +1756,7 @@ GameObject:
   - component: {fileID: 700783344}
   - component: {fileID: 700783343}
   - component: {fileID: 700783342}
+  - component: {fileID: 700783346}
   m_Layer: 0
   m_Name: Bottle (10)
   m_TagString: Bottle
@@ -1784,6 +1875,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &700783346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 700783341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &746719709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1797,7 +1902,7 @@ GameObject:
   - component: {fileID: 746719712}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1857,7 +1962,7 @@ Transform:
   m_LocalScale: {x: 2938.2378, y: 157.33565, z: 157.33565}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &746719712
 Rigidbody2D:
@@ -1915,6 +2020,8 @@ GameObject:
   - component: {fileID: 773543151}
   - component: {fileID: 773543150}
   - component: {fileID: 773543149}
+  - component: {fileID: 773543154}
+  - component: {fileID: 773543153}
   m_Layer: 0
   m_Name: Bottle (7)
   m_TagString: Bottle
@@ -2033,6 +2140,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &773543153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 773543148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 0
+  drunkCheck: 0
+  thrown: 0
+--- !u!114 &773543154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 773543148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &797454768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,6 +2179,7 @@ GameObject:
   - component: {fileID: 797454771}
   - component: {fileID: 797454770}
   - component: {fileID: 797454769}
+  - component: {fileID: 797454773}
   m_Layer: 0
   m_Name: Bottle (6)
   m_TagString: Bottle
@@ -2162,6 +2298,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &797454773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 797454768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &816911484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,7 +2325,7 @@ GameObject:
   - component: {fileID: 816911485}
   m_Layer: 0
   m_Name: Ceiling
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2280,7 +2430,7 @@ Transform:
   m_LocalScale: {x: 2938.2378, y: 157.33565, z: 157.33565}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &828682000
 GameObject:
@@ -2310,7 +2460,7 @@ Transform:
   - {fileID: 1672121561}
   - {fileID: 106907038}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1116925023
 GameObject:
@@ -2338,7 +2488,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376517562
 GameObject:
@@ -2351,6 +2501,7 @@ GameObject:
   - component: {fileID: 1376517565}
   - component: {fileID: 1376517564}
   - component: {fileID: 1376517563}
+  - component: {fileID: 1376517567}
   m_Layer: 0
   m_Name: Bottle (8)
   m_TagString: Bottle
@@ -2469,6 +2620,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1376517567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1376517562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b54bffd8c56a5b4d92c3f59e17b710a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 10
+  drunkCheck: 0
+  thrown: 0
 --- !u!1 &1470952264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,7 +2647,7 @@ GameObject:
   - component: {fileID: 1470952265}
   m_Layer: 0
   m_Name: Left Platform
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2587,7 +2752,7 @@ Transform:
   m_LocalScale: {x: 633.561, y: 44.419353, z: 157.33565}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1579701001
 GameObject:
@@ -2747,8 +2912,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &1707259013 stripped
+--- !u!1 &1707259013
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1707259015}
+  - component: {fileID: 1707259014}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!114 &1707259014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2761,28 +2940,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemForce: 0
+  direction: 0
   playerNum: 0
   moveSpeed: 0
-  healthSprite: {fileID: 0}
---- !u!1 &1874974710
-GameObject:
+--- !u!4 &1707259015
+Transform:
   m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1707259013}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1874974710 stripped
+GameObject:
   m_PrefabParentObject: {fileID: 1020951025553214, guid: 5cb5a813c0b2b5f458fb9f202ef4c0ff,
     type: 2}
   m_PrefabInternal: {fileID: 2073409609}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1874974714}
-  - component: {fileID: 1874974713}
-  - component: {fileID: 1874974712}
-  - component: {fileID: 1874974711}
-  m_Layer: 0
-  m_Name: Bottle (3)
-  m_TagString: Bottle
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!50 &1874974711
 Rigidbody2D:
   serializedVersion: 4
@@ -2881,19 +3059,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!4 &1874974714
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1874974710}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.73, y: 3.44, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2073409609
 Prefab:
   m_ObjectHideFlags: 0
