@@ -46,14 +46,6 @@ public class Player : MonoBehaviour {
 		bool throwBtn = Input.GetButton("Throw" + playerNum);
 
 		gameObject.transform.position = gameObject.transform.position + new Vector3(moveSpeed * xAxis, 0.0f);
-        if (xAxis > 0)
-        {
-            direction = 1;
-        }
-        else if (xAxis < 0)
-        {
-            direction = 0;
-        }
 
 		if(throwBtn && hasPickup)
 		{
@@ -61,16 +53,7 @@ public class Player : MonoBehaviour {
 			heldItem.transform.parent = null;
 			heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Round(xAxis)) * (Mathf.Cos(xAxis)), 2.5f * (Mathf.Sin(yAxis)), 0.0f);
 			heldItem.AddComponent<Rigidbody2D>();
-            if (direction == 0)
-            {
-                heldItem.transform.position = this.transform.position + new Vector3(-2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
-                heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(-itemForce, itemForce));
-            }
-            else
-            {
-                heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
-                heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce, itemForce));
-            }
+            heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * xAxis, itemForce * yAxis));
             heldItem.GetComponent<Throwable>().thrown = true;
         }
 
