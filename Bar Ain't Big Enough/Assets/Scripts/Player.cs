@@ -2,22 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-
+public class Player : MonoBehaviour 
+{
+	// player health
     int health;
+
+	// checks if player is holding a pick up
     bool hasPickup = false;
+
+	// gameobject to store the held item
     GameObject heldItem;
+
+	// item force and direction
     public float itemForce = 0.0f;
     public int direction = 0; 
+
 	//Is this player 1, 2, 3, or 4?
 	public int playerNum;
 
+	// how fast the character is moving
 	public float moveSpeed;
 
-    //UI Assets
-
     // Use this for initialization
-    void Start () {
+    void Start () 
+	{
         health = 100;
 		if(playerNum > 4 || playerNum <= 0)
 		{
@@ -66,14 +74,22 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -75.0f));
-                //gameObject.transform.position = gameObject.transform.position + new Vector3(0.0f, -0.1f);
+                //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -75.0f));
+
+				// cannot go below the floor
+				if (gameObject.transform.position.y > -4) {
+					gameObject.transform.position = gameObject.transform.position + new Vector3 (0.0f, -0.1f);
+				}
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 175.0f));
-                gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.0f, 0.1f));
-                //gameObject.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.14f);
+                //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.0f, 0.1f));
+
+				// cannot fly
+				if (gameObject.transform.position.y < gameObject.transform.position.y + 4.0f) {
+					gameObject.transform.position += new Vector3 (0.0f, 0.14f);
+				}
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
@@ -89,6 +105,9 @@ public class Player : MonoBehaviour {
                 //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.1f, 0.0f));
                 direction = 1;
             }
+				
+			//attempt to keep upright
+			//gameObject.GetComponent<Rigidbody2D> ().MoveRotation (180.0f);
 
             if (Input.GetMouseButtonDown(0))
             {
