@@ -9,11 +9,20 @@ public class Player : MonoBehaviour {
     GameObject heldItem;
     public float itemForce = 0.0f;
 
+	//Is this player 1, 2, 3, or 4?
+	public int playerNum;
+
+	public float moveSpeed;
+
     //UI Assets
 
     // Use this for initialization
     void Start () {
         health = 100;
+		if(playerNum > 4 || playerNum <= 0)
+		{
+			playerNum = 1;
+		}
 	}
 	
 	// Update is called once per frame
@@ -30,6 +39,28 @@ public class Player : MonoBehaviour {
 
     void ProcessInput()
     {
+
+		float xAxis = Input.GetAxis("LeftX" + playerNum);
+		float yAxis = Input.GetAxis("LeftY" + playerNum);
+		bool jumpBtn = Input.GetButton("Jump" + playerNum);
+		bool throwBtn = Input.GetButton("Throw" + playerNum);
+
+		gameObject.transform.position = gameObject.transform.position + new Vector3(moveSpeed * xAxis, 0.0f);
+
+		if(throwBtn && hasPickup)
+		{
+			hasPickup = false;
+			heldItem.transform.parent = null;
+			heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Round(xAxis)) * (Mathf.Cos(xAxis)), 2.5f * (Mathf.Sin(yAxis)), 0.0f);
+			heldItem.AddComponent<Rigidbody2D>();
+			heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * xAxis, itemForce * yAxis));
+		}
+
+		if(jumpBtn)
+		{
+			gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + moveSpeed, 0.0f);
+		}
+
         if (gameObject.tag == "Player1")
         {
             if (Input.GetKey(KeyCode.DownArrow))
@@ -72,30 +103,28 @@ public class Player : MonoBehaviour {
         {
 
         }
+        
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (health >= 1)
+        if (other.gameObject.tag == "Bottle")
         {
-            if (other.gameObject.tag == "Bottle")
-            {
-                if (!hasPickup)
-                {
-                    hasPickup = true;
-                    Destroy(other.rigidbody);
-                    other.gameObject.transform.parent = this.transform;
-                    other.transform.position = this.transform.position + new Vector3(0.0f, 0.1f);
-                    heldItem = other.gameObject;
-                }
-                else
-                {
-                    applyDamage(10);
-                    Destroy(other.gameObject);
-                    Debug.Log("Player's current health: " + health);
-                }
-            }
-        }
+			if (!hasPickup)
+			{
+				hasPickup = true;
+				Destroy(other.rigidbody);
+				other.gameObject.transform.parent = this.transform;
+				other.transform.position = this.transform.position + new Vector3(0.0f, 0.1f);
+				heldItem = other.gameObject;
+			}
+			else
+			{
+				applyDamage(10);
+				Destroy(other.gameObject);
+				Debug.Log("Player's current health: " + health);
+			}
+		}
     }
     /// <summary>
     /// Applies damage to the player and reflects damage taken through health meter

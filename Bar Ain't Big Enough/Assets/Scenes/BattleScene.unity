@@ -743,6 +743,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemForce: 500
+  playerNum: 1
+  moveSpeed: 0.1
+  healthSprite: {fileID: 0}
 --- !u!1 &214095468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,11 +2747,29 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &1874974710
+--- !u!1 &1707259013 stripped
 GameObject:
+--- !u!114 &1707259014
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1707259013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b00c09665c1264ca77aca879afa9fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemForce: 0
+  playerNum: 0
+  moveSpeed: 0
+  healthSprite: {fileID: 0}
+--- !u!1 &1874974710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1020951025553214, guid: 5cb5a813c0b2b5f458fb9f202ef4c0ff,
+    type: 2}
+  m_PrefabInternal: {fileID: 2073409609}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1874974714}
