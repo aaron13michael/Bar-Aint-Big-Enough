@@ -773,8 +773,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b00c09665c1264ca77aca879afa9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
   itemForce: 500
+  playerNum: 1
+  moveSpeed: 0.1
+  healthSprite: {fileID: 0}
 --- !u!1 &214095468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,8 +2765,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b00c09665c1264ca77aca879afa9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
   itemForce: 0
+  playerNum: 0
+  moveSpeed: 0
+  healthSprite: {fileID: 0}
 --- !u!1 &1874974710
 GameObject:
   m_ObjectHideFlags: 0
