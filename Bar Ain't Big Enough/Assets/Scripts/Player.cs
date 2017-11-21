@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
 	// player health
     int health;
-
+    int drunkeness;
 	// checks if player is holding a pick up
     bool hasPickup = false;
 
@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     void Start () 
 	{
         health = 100;
+        drunkeness = 1000;
 		if(playerNum > 4 || playerNum <= 0)
 		{
 			playerNum = 1;
@@ -42,6 +43,11 @@ public class Player : MonoBehaviour
         else
         {
             ProcessInput();
+            Transform drunkMeter = gameObject.transform.parent.GetChild(0).GetChild(2);
+            if (drunkMeter.transform.childCount > 0)
+                Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
+
+            drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
         }
 	}
 
