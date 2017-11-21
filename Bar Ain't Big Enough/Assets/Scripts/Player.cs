@@ -2,20 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-
+public class Player : MonoBehaviour 
+{
+	// player health
     int health;
     int drunkeness;
+	// checks if player is holding a pick up
     bool hasPickup = false;
-    GameObject heldItem;
-    public float itemForce = 0.0f;
 
-    //UI Assets
+	// gameobject to store the held item
+    GameObject heldItem;
+
+	// item force and direction
+    public float itemForce = 0.0f;
+    public int direction = 0; 
+
+	//Is this player 1, 2, 3, or 4?
+	public int playerNum;
+
+	// how fast the character is moving
+	public float moveSpeed;
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+	{
         health = 100;
         drunkeness = 1000;
+		if(playerNum > 4 || playerNum <= 0)
+		{
+			playerNum = 1;
+		}
 	}
 	
 	// Update is called once per frame
@@ -37,31 +53,67 @@ public class Player : MonoBehaviour {
 
     void ProcessInput()
     {
+
+		float xAxis = Input.GetAxis("LeftX" + playerNum);
+		float yAxis = Input.GetAxis("LeftY" + playerNum);
+		bool jumpBtn = Input.GetButton("Jump" + playerNum);
+		bool throwBtn = Input.GetButton("Throw" + playerNum);
+
+		gameObject.transform.position = gameObject.transform.position + new Vector3(moveSpeed * xAxis, 0.0f);
+
+		if(throwBtn && hasPickup)
+		{
+			hasPickup = false;
+			heldItem.transform.parent = null;
+			heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Round(xAxis)) * (Mathf.Cos(xAxis)), 2.5f * (Mathf.Sin(yAxis)), 0.0f);
+			heldItem.AddComponent<Rigidbody2D>();
+            heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * xAxis, itemForce * yAxis));
+            heldItem.GetComponent<Throwable>().thrown = true;
+        }
+
+		if(jumpBtn)
+		{
+			gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + moveSpeed, 0.0f);
+		}
+
         if (gameObject.tag == "Player1")
         {
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -75.0f));
-                //gameObject.transform.position = gameObject.transform.position + new Vector3(0.0f, -0.1f);
+                //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -75.0f));
+
+				// cannot go below the floor
+				if (gameObject.transform.position.y > -4) {
+					gameObject.transform.position = gameObject.transform.position + new Vector3 (0.0f, -0.1f);
+				}
             }
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 175.0f));
-                gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.0f, 0.1f));
-                //gameObject.transform.position = gameObject.transform.position + new Vector3(0.0f, 0.14f);
+                //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.0f, 0.1f));
+
+				// cannot fly
+				if (gameObject.transform.position.y < gameObject.transform.position.y + 4.0f) {
+					gameObject.transform.position += new Vector3 (0.0f, 0.14f);
+				}
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-75.0f, 0.0f));
                 gameObject.transform.position = gameObject.transform.position + new Vector3(-0.1f, 0.0f);
                 //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(-0.1f, 0.0f));
+                direction = 0;
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(75.0f, 0.0f));
                 gameObject.transform.position = gameObject.transform.position + new Vector3(0.1f, 0.0f);
                 //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.1f, 0.0f));
+                direction = 1;
             }
+				
+			//attempt to keep upright
+			//gameObject.GetComponent<Rigidbody2D> ().MoveRotation (180.0f);
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -71,7 +123,17 @@ public class Player : MonoBehaviour {
                     heldItem.transform.parent = null;
                     heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
                     heldItem.AddComponent<Rigidbody2D>();
-                    heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce, itemForce));
+                    if (direction == 0)
+                    {
+                        heldItem.transform.position = this.transform.position + new Vector3(-2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
+                        heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(-itemForce, itemForce));
+                    }
+                    else
+                    {
+                        heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
+                        heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce, itemForce));
+                    }
+                    heldItem.GetComponent<Throwable>().thrown = true;
                 }
             }
         }
@@ -79,6 +141,7 @@ public class Player : MonoBehaviour {
         {
 
         }
+        
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -87,22 +150,25 @@ public class Player : MonoBehaviour {
         {
             if (other.gameObject.tag == "Bottle")
             {
-                if (!hasPickup)
+                if (other.gameObject.GetComponent<Throwable>().thrown)
                 {
-                    hasPickup = true;
-                    Destroy(other.rigidbody);
-                    other.gameObject.transform.parent = this.transform;
-                    other.transform.position = this.transform.position + new Vector3(0.0f, 0.1f);
-                    heldItem = other.gameObject;
-                }
-                else
-                {
-                    applyDamage(10);
+                    applyDamage(other.gameObject.GetComponent<Throwable>().weight);
                     Destroy(other.gameObject);
                     Debug.Log("Player's current health: " + health);
                 }
+                else
+                {
+                    if (!hasPickup)
+                    {
+                        hasPickup = true;
+                        Destroy(other.rigidbody);
+                        other.gameObject.transform.parent = this.transform;
+                        other.transform.position = this.transform.position + new Vector3(0.0f, 0.1f);
+                        heldItem = other.gameObject;
+                    }
+                }
             }
-        }
+		}
     }
     /// <summary>
     /// Applies damage to the player and reflects damage taken through health meter

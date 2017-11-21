@@ -10,6 +10,7 @@ TagManager:
   - Player2
   - Throwable
   - UI
+  - Terrain
   layers:
   - Default
   - TransparentFX
