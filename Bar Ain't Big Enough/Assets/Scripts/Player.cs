@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     int health;
+    int drunkeness;
     bool hasPickup = false;
     GameObject heldItem;
     public float itemForce = 0.0f;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         health = 100;
+        drunkeness = 1000;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +27,11 @@ public class Player : MonoBehaviour {
         else
         {
             ProcessInput();
+            Transform drunkMeter = gameObject.transform.parent.GetChild(0).GetChild(2);
+            if (drunkMeter.transform.childCount > 0)
+                Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
+
+            drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
         }
 	}
 
