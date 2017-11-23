@@ -11,6 +11,9 @@ TagManager:
   - Throwable
   - UI
   - Terrain
+  - Map
+  - ShowOnPause
+  - ShowGameOver
   layers:
   - Default
   - TransparentFX
