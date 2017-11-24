@@ -17,8 +17,11 @@ public class Player : MonoBehaviour
     public float itemForce = 0.0f;
     public int direction = 0; 
 
-	//Is this player 1, 2, 3, or 4?
+	// Is this player 1, 2, 3, or 4?
 	public int playerNum;
+
+    // String representing player in UI
+    public string Label;
 
 	// how fast the character is moving
 	public float moveSpeed;
