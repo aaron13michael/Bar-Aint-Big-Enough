@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 	// checks if player is holding a pick up
     bool hasPickup = false;
 
+    // True if drunkeness is increasing. False otherwise.
+    bool drunkApply = false;
+
 	// gameobject to store the held item
     GameObject heldItem;
 
@@ -46,8 +49,10 @@ public class Player : MonoBehaviour
         else
         {
             ProcessInput();
+
+            //Slowly decrease drunkeness level
             Transform drunkMeter = gameObject.transform.parent.GetChild(0).GetChild(2);
-            if (drunkMeter.transform.childCount > 0)
+            if (drunkMeter.transform.childCount > 0 && !drunkApply)
                 Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
 
             drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
@@ -84,7 +89,6 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.DownArrow))
             {
                 //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -75.0f));
-
 				// cannot go below the floor
 				if (gameObject.transform.position.y > -4) {
 					gameObject.transform.position = gameObject.transform.position + new Vector3 (0.0f, -0.1f);
@@ -189,6 +193,18 @@ public class Player : MonoBehaviour
         {
             Destroy(healthMeter.transform.GetChild(h - 1).gameObject);
         }
+    }
+
+    /// <summary>
+    /// Set the level of drunkeness for a player
+    /// </summary>
+    /// <param name="amount">New value of the player's drunkeness out of 1000</param>
+    void applyDrunk(int amount)
+    {
+        drunkeness = drunkeness + amount < 1000 ? drunkeness + amount : 1000;
+        drunkApply = true;
+        gameObject.transform.parent.GetChild(0).gameObject.GetComponent<PlayerUI>().createDrunkMeter(drunkeness);
+        drunkApply = false;
     }
 
     void Death()
