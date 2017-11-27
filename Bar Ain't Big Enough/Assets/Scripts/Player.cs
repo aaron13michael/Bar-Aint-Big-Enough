@@ -20,8 +20,15 @@ public class Player : MonoBehaviour
 	//Is this player 1, 2, 3, or 4?
 	public int playerNum;
 
-	// how fast the character is moving
-	public float moveSpeed;
+	private float pickupTime;
+
+	private float jumpCD ; // cooldown timer on jumps
+	public float prevJumpTime; // the last time that jump was used
+
+	private Rigidbody2D rb;
+	private Animator animator;
+
+	public float maxVel;
 
     // Use this for initialization
     void Start () 
@@ -31,10 +38,18 @@ public class Player : MonoBehaviour
 		{
 			playerNum = 1;
 		}
+
+		pickupTime = 0.0f;
+		jumpCD = 1.5f;
+		prevJumpTime = -2.0f;
+
+		rb = GetComponent<Rigidbody2D> ();
+		animator = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		if (health <= 0)
         {
             Death();
@@ -47,13 +62,43 @@ public class Player : MonoBehaviour
 
     void ProcessInput()
     {
-
 		float xAxis = Input.GetAxis("LeftX" + playerNum);
 		float yAxis = Input.GetAxis("LeftY" + playerNum);
 		bool jumpBtn = Input.GetButton("Jump" + playerNum);
 		bool throwBtn = Input.GetButton("Throw" + playerNum);
 
-		gameObject.transform.position = gameObject.transform.position + new Vector3(moveSpeed * xAxis, 0.0f);
+
+		if(xAxis > 0) 
+		{
+			rb.AddForce (new Vector2(20.0f, 0.0f));
+			animator.SetFloat ("xVelocity", rb.velocity.x);
+		}
+		if(xAxis < 0)
+		{
+			rb.AddForce (new Vector2(-20.0f, 0.0f));
+			animator.SetFloat ("xVelocity", rb.velocity.x);
+		}
+		else if(xAxis == 0)
+		{
+			Vector2 currentVel = rb.velocity;
+			currentVel.x *= 0.0f;
+			rb.velocity = currentVel;
+			animator.SetFloat ("xVelocity", rb.velocity.x);
+		}
+
+		Vector2 velocity = new Vector2(maxVel, 0.0f); 
+		if (Mathf.Abs(rb.velocity.x) > maxVel) 
+		{
+			if (rb.velocity.x > 0.0f) 
+			{
+				rb.velocity = velocity;
+			}
+			else 
+			{
+				rb.velocity = -velocity;
+			}
+		}
+		animator.SetFloat ("xVelocity", rb.velocity.x);
 
 		if(throwBtn && hasPickup)
 		{
@@ -65,85 +110,45 @@ public class Player : MonoBehaviour
             heldItem.GetComponent<Throwable>().thrown = true;
         }
 
-		if(jumpBtn)
+		if(jumpBtn && (Time.time - prevJumpTime) >= jumpCD)
 		{
-			gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + moveSpeed, 0.0f);
+			prevJumpTime = Time.time;
+			rb.AddForce (new Vector2(0.0f, 2000.0f));
+			animator.SetTrigger ("Jump");
+		}
+		if (yAxis < 0) // drop faster by holding down on the joystick's yaxis
+		{
+			rb.AddForce (new Vector2(0.0f, -20.0f));
 		}
 
-        if (gameObject.tag == "Player1")
-        {
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, -75.0f));
-
-				// cannot go below the floor
-				if (gameObject.transform.position.y > -4) {
-					gameObject.transform.position = gameObject.transform.position + new Vector3 (0.0f, -0.1f);
-				}
-            }
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 175.0f));
-                //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.0f, 0.1f));
-
-				// cannot fly
-				if (gameObject.transform.position.y < gameObject.transform.position.y + 4.0f) {
-					gameObject.transform.position += new Vector3 (0.0f, 0.14f);
-				}
-            }
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-75.0f, 0.0f));
-                gameObject.transform.position = gameObject.transform.position + new Vector3(-0.1f, 0.0f);
-                //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(-0.1f, 0.0f));
-                direction = 0;
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(75.0f, 0.0f));
-                gameObject.transform.position = gameObject.transform.position + new Vector3(0.1f, 0.0f);
-                //gameObject.GetComponent<Rigidbody2D>().MovePosition(gameObject.GetComponent<Rigidbody2D>().position + new Vector2(0.1f, 0.0f));
-                direction = 1;
-            }
-				
-			//attempt to keep upright
-			//gameObject.GetComponent<Rigidbody2D> ().MoveRotation (180.0f);
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (hasPickup)
-                {
-                    hasPickup = false;
-                    heldItem.transform.parent = null;
-                    heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
-                    heldItem.AddComponent<Rigidbody2D>();
-                    if (direction == 0)
-                    {
-                        heldItem.transform.position = this.transform.position + new Vector3(-2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
-                        heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(-itemForce, itemForce));
-                    }
-                    else
-                    {
-                        heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Cos(this.transform.rotation.z)), 0.2f * (Mathf.Sin(this.transform.rotation.z)), 0.0f);
-                        heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce, itemForce));
-                    }
-                    heldItem.GetComponent<Throwable>().thrown = true;
-                }
-            }
-        }
-        else
-        {
-
-        }
-        
+		animator.SetFloat ("yVelocity", rb.velocity.y);
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
+		bool pickupBtn = Input.GetButton ("Pickup" + playerNum);
+
         if (health >= 1)
         {
             if (other.gameObject.tag == "Bottle")
             {
+				// If the player holds down the pickup button (X) for a second, they will pick up a bottle
+				if (pickupBtn) 
+				{
+					if (!hasPickup)
+					{
+						hasPickup = true;
+						Destroy(other.rigidbody);
+						//other.gameObject.AddComponent<HingeJoint2D> ();
+						//other.gameObject.GetComponent<HingeJoint2D> ().connectedBody = GameObject.FindGameObjectWithTag ("ThrowingHand").GetComponent<Rigidbody2D>();
+						//other.gameObject.GetComponent<HingeJoint2D> ().enableCollision = false;
+						other.gameObject.transform.parent = this.transform;
+						other.transform.position = this.transform.position + new Vector3(1.0f, 0.1f);
+						heldItem = other.gameObject;
+					}
+				}
+
+				/*
                 if (other.gameObject.GetComponent<Throwable>().thrown)
                 {
                     applyDamage(other.gameObject.GetComponent<Throwable>().weight);
@@ -161,6 +166,8 @@ public class Player : MonoBehaviour
                         heldItem = other.gameObject;
                     }
                 }
+                */
+
             }
 		}
     }
