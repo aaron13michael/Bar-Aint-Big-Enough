@@ -11,6 +11,7 @@ TagManager:
   - Throwable
   - UI
   - Terrain
+  - Stairs
   layers:
   - Default
   - TransparentFX
