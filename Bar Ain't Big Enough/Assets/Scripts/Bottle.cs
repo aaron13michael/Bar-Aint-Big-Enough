@@ -93,7 +93,7 @@ public class Bottle : Throwable {
 	//Randomly plays one of the bottle break sounds
 	private void PlayBreak()
 	{
-		int breakIndex = Random.Range(0, bBreak.Length - 1);
+		int breakIndex = Random.Range(0, bBreak.Length);
 
 		audio.clip = bBreak[breakIndex];
 		audio.Play();
