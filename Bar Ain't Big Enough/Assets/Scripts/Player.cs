@@ -66,9 +66,9 @@ public class Player : MonoBehaviour
             ProcessInput();
 
             //Slowly decrease drunkeness level
-            Transform drunkMeter = gameObject.transform.parent.GetChild(0).GetChild(2);
-            if (drunkMeter.transform.childCount > 0 && !drunkApply)
-                Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
+            //Transform drunkMeter = gameObject.transform.parent.GetChild(0).GetChild(2);
+            //if (drunkMeter.transform.childCount > 0 && !drunkApply)
+                //Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
 
             drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
         }
