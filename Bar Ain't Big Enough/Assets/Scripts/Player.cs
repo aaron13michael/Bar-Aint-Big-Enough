@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
 	public string Label;
 
 	// gameobject to store the held item
-    GameObject heldItem;
-
+    public GameObject heldItem;
+    public GameObject footCollider;
 	// item force and direction
     public float itemForce = 0.0f;
     public int direction = 0; 
@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 	private Animator animator;
 
 	public float maxVel;
+
 
     // Use this for initialization
     void Start () 
@@ -183,7 +184,63 @@ public class Player : MonoBehaviour
 
             }
 		}
+        //Check if the stairs are below the player's feet.
+        if (other.gameObject.tag == "Stairs")
+        {
+            //If they aren't, allow player to walk 
+            if (!(gameObject.transform.position.y - gameObject.GetComponent<Collider2D>().bounds.size.y / 2 > other.gameObject.transform.position.y + other.gameObject.GetComponent<Collider2D>().bounds.size.y / 2))
+            {
+                other.gameObject.GetComponent<Collider2D>().isTrigger = true;
+            }
+        }
     }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Stairs")
+        {
+            if (!(gameObject.transform.position.y - gameObject.GetComponent<Collider2D>().bounds.size.y / 2 > other.gameObject.transform.position.y + other.gameObject.GetComponent<Collider2D>().bounds.size.y / 2))
+            {
+                other.gameObject.GetComponent<Collider2D>().isTrigger = true;
+            }
+            Debug.Log("Within trigger");
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Stairs")
+        {
+            Debug.Log("Exited trigger");
+            other.gameObject.GetComponent<Collider2D>().isTrigger = true;
+        }
+    }
+
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Stairs")
+        {
+            if (gameObject.transform.position.y - gameObject.GetComponent<Collider2D>().bounds.size.y/2 > other.gameObject.transform.position.y + other.bounds.size.y/2)
+            {
+                other.isTrigger = false;
+            }
+            else
+            {
+                other.isTrigger = true;
+            }
+        }
+    }
+
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Stairs")
+        {
+            other.isTrigger = false;
+        }
+    }
+
     /// <summary>
     /// Applies damage to the player and reflects damage taken through health meter
     /// </summary>
