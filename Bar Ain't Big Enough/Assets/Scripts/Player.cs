@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
 		if(jumpBtn && (Time.time - prevJumpTime) >= jumpCD)
 		{
 			prevJumpTime = Time.time;
-			rb.velocity = new Vector2 (rb.velocity.x, 7.0f);
+			rb.velocity = new Vector2 (rb.velocity.x, 8.5f);
 			animator.SetTrigger ("Jump");
 		}	
     }

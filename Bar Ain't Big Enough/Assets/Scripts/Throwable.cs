@@ -32,7 +32,7 @@ public class Throwable : MonoBehaviour {
 			onGround = false;
 
 			// if the first object the thrown bottle hits is terrain
-            if (other.gameObject.tag == "Terrain")
+			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs")
             {
                 thrown = false;
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-gameObject.GetComponent<Rigidbody2D>().velocity.x * .8f, -gameObject.GetComponent<Rigidbody2D>().velocity.y * .8f));
