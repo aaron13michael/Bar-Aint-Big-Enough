@@ -6,8 +6,6 @@ TagManager:
   tags:
   - BottomCollider
   - Bottle
-  - Player1
-  - Player2
   - Throwable
   - UI
   - Terrain
@@ -15,6 +13,7 @@ TagManager:
   - ShowOnPause
   - ShowGameOver
   - ThrowingHand
+  - Stairs
   layers:
   - Default
   - TransparentFX

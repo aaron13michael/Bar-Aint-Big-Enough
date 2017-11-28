@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 	// player health
     int health;
     int drunkeness;
+
 	// checks if player is holding a pick up
     bool hasPickup = false;
 
@@ -59,6 +60,7 @@ public class Player : MonoBehaviour
         {
             ProcessInput();
 
+			// UI Meter
             //Slowly decrease drunkeness level
             //Transform drunkMeter = gameObject.transform.parent.GetChild(0).GetChild(2);
             //if (drunkMeter.transform.childCount > 0 && !drunkApply)
