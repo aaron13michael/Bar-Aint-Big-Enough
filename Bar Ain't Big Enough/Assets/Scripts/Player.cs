@@ -33,12 +33,13 @@ public class Player : MonoBehaviour
 	private Animator animator;
 
 	private bool grounded;
+    private float modifier; //value for modifying throw strength and movement speed for being drunk
 
     // Use this for initialization
     void Start () 
 	{
         health = 100;
-        drunkeness = 1000;
+        drunkeness = 0;
 		if(playerNum > 4 || playerNum <= 0)
 		{
 			playerNum = 1;
@@ -70,6 +71,14 @@ public class Player : MonoBehaviour
                 //Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
 
             drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
+            if (drunkeness > 0)
+            {
+                modifier = 1.0f + (drunkeness / 500.0f);
+            }
+            else
+            {
+                modifier = 1.0f;
+            }
         }
 
 		//grounded = false;
@@ -82,16 +91,17 @@ public class Player : MonoBehaviour
 		float yAxis = Input.GetAxis("LeftY" + playerNum);
 		bool jumpBtn = Input.GetButton("Jump" + playerNum);
 		bool throwBtn = Input.GetButton("Throw" + playerNum);
+        bool useBtn = Input.GetButton("Use" + playerNum);
 
 		// Run
 		if(xAxis > 0) 
 		{
-			rb.velocity = new Vector2 (7.0f, rb.velocity.y);
+			rb.velocity = new Vector2 (7.0f * modifier, rb.velocity.y);
 			animator.SetBool ("Right", true);
 		}
 		else if(xAxis < 0)
 		{
-			rb.velocity = new Vector2 (-7.0f, rb.velocity.y);
+			rb.velocity = new Vector2 (-7.0f * modifier, rb.velocity.y);
 			animator.SetBool ("Right", false);
 		}
 		else if(xAxis == 0)
@@ -104,14 +114,27 @@ public class Player : MonoBehaviour
 		{
 			hasPickup = false;
 			heldItem.transform.parent = null;
-			heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Round(xAxis)) * (Mathf.Cos(xAxis)), 2.5f * (Mathf.Sin(yAxis)), 0.0f);
+			heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Round(xAxis)) * (Mathf.Cos(xAxis)) * modifier, 2.5f * (Mathf.Sin(yAxis)) * modifier, 0.0f);
 			heldItem.AddComponent<Rigidbody2D>();
             heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * xAxis, itemForce * yAxis));
             heldItem.GetComponent<Throwable>().thrown = true;
         }
+        // Drink bottle
+        if (useBtn && hasPickup)
+        {
+            if (heldItem.GetComponent<Bottle>().bState == Bottle.BottleState.Full)
+            {
+                heldItem.GetComponent<Bottle>().bState = Bottle.BottleState.Empty;
+                drunkeness += 500;
+                if (drunkeness >= 1000)
+                {
+                    Object.Destroy(gameObject);
+                }
+            }
+        }
 
-		// Jump
-		if(jumpBtn && grounded)
+        // Jump
+            if(jumpBtn && grounded)
 		{
 			prevJumpTime = Time.time;
 			rb.velocity = new Vector2 (rb.velocity.x, 8.0f);
