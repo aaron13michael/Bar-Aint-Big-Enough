@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9e0d0be7437b33248a6131fb1f9e1c34
+timeCreated: 1511840956
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fullBottle: {fileID: 21300000, guid: 0ed45610ce737ed43aaf89be0c365118, type: 3}
+  - emptyBottle: {fileID: 21300000, guid: 7446e79d67385254aa6bfe0d3c87752b, type: 3}
+  - brokenBottle: {fileID: 21300000, guid: 6d25666d25bfea142a3eb037f38ceef0, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

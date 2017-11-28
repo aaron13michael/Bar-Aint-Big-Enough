@@ -123,49 +123,45 @@ public class Player : MonoBehaviour
     {
 		bool pickupBtn = Input.GetButton ("Pickup" + playerNum);
 
-
-        if (health >= 1)
+        if (other.gameObject.tag == "Bottle")
         {
-            if (other.gameObject.tag == "Bottle")
-            {
-				// If the player holds down the pickup button (X) for a second, they will pick up a bottle
-				if (pickupBtn) 
+			// If the player holds down the pickup button (X) for a second, they will pick up a bottle
+			if (pickupBtn) 
+			{
+				if (!hasPickup)
 				{
-					if (!hasPickup)
-					{
-						hasPickup = true;
-						Destroy(other.rigidbody);
-						//other.gameObject.AddComponent<HingeJoint2D> ();
-						//other.gameObject.GetComponent<HingeJoint2D> ().connectedBody = GameObject.FindGameObjectWithTag ("ThrowingHand").GetComponent<Rigidbody2D>();
-						//other.gameObject.GetComponent<HingeJoint2D> ().enableCollision = false;
-						other.gameObject.transform.parent = this.transform;
-						other.transform.position = this.transform.position + new Vector3(1.0f, 0.1f);
-						heldItem = other.gameObject;
-					}
+					hasPickup = true;
+					Destroy(other.rigidbody);
+					//other.gameObject.AddComponent<HingeJoint2D> ();
+					//other.gameObject.GetComponent<HingeJoint2D> ().connectedBody = GameObject.FindGameObjectWithTag ("ThrowingHand").GetComponent<Rigidbody2D>();
+					//other.gameObject.GetComponent<HingeJoint2D> ().enableCollision = false;
+					other.gameObject.transform.parent = this.transform;
+					other.transform.position = this.transform.position + new Vector3(1.0f, 0.1f);
+					heldItem = other.gameObject;
 				}
+			}
 
-				/*
-                if (other.gameObject.GetComponent<Throwable>().thrown)
-                {
-                    applyDamage(other.gameObject.GetComponent<Throwable>().weight);
-                    Destroy(other.gameObject);
-                    Debug.Log("Player's current health: " + health);
-                }
-                else
-                {
-                    if (!hasPickup)
-                    {
-                        hasPickup = true;
-                        Destroy(other.rigidbody);
-                        other.gameObject.transform.parent = this.transform;
-                        other.transform.position = this.transform.position + new Vector3(0.0f, 0.1f);
-                        heldItem = other.gameObject;
-                    }
-                }
-                */
-
+			/*
+            if (other.gameObject.GetComponent<Throwable>().thrown)
+            {
+                applyDamage(other.gameObject.GetComponent<Throwable>().weight);
+                Destroy(other.gameObject);
+                Debug.Log("Player's current health: " + health);
             }
-		}
+            else
+            {
+                if (!hasPickup)
+                {
+                    hasPickup = true;
+                    Destroy(other.rigidbody);
+                    other.gameObject.transform.parent = this.transform;
+                    other.transform.position = this.transform.position + new Vector3(0.0f, 0.1f);
+                    heldItem = other.gameObject;
+                }
+            }
+            */
+
+        }
         //Check if the stairs are below the player's feet.
         if (other.gameObject.tag == "Stairs")
         {
