@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212919396301763624}
   - component: {fileID: 61840918154731662}
   - component: {fileID: 50581575776689508}
-  - component: {fileID: 114267266576042402}
   - component: {fileID: 233246651572674834}
   m_Layer: 0
   m_Name: left_leg
@@ -39,9 +38,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4902827860697000}
+  - component: {fileID: 50094856467494666}
+  - component: {fileID: 212172664746257936}
+  - component: {fileID: 114773103692419252}
   m_Layer: 0
   m_Name: Ragdoll Character
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +59,6 @@ GameObject:
   - component: {fileID: 212615202045226860}
   - component: {fileID: 58435099262525532}
   - component: {fileID: 50182613322133770}
-  - component: {fileID: 114891459956350860}
   - component: {fileID: 233564053246746482}
   m_Layer: 0
   m_Name: head
@@ -77,7 +78,6 @@ GameObject:
   - component: {fileID: 212381615972606596}
   - component: {fileID: 61483108427552724}
   - component: {fileID: 50044520924689294}
-  - component: {fileID: 114402889559761296}
   - component: {fileID: 233514014302777854}
   m_Layer: 0
   m_Name: left_arm
@@ -97,7 +97,6 @@ GameObject:
   - component: {fileID: 212305945500506352}
   - component: {fileID: 61480559215091812}
   - component: {fileID: 50826185748909062}
-  - component: {fileID: 114156401267466066}
   - component: {fileID: 233144972350778072}
   m_Layer: 0
   m_Name: right_leg
@@ -117,7 +116,6 @@ GameObject:
   - component: {fileID: 212031074907997886}
   - component: {fileID: 61202193610585276}
   - component: {fileID: 50488847816345640}
-  - component: {fileID: 114781216078171166}
   m_Layer: 0
   m_Name: torso
   m_TagString: Untagged
@@ -136,7 +134,6 @@ GameObject:
   - component: {fileID: 212958145935365388}
   - component: {fileID: 61576426194774300}
   - component: {fileID: 50936721913025462}
-  - component: {fileID: 114814255207919884}
   - component: {fileID: 233582455849112188}
   m_Layer: 0
   m_Name: right_arm
@@ -182,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4902827860697000}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4270492182888268
 Transform:
@@ -208,7 +205,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4902827860697000}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4677743267763446
 Transform:
@@ -221,7 +218,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4902827860697000}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!4 &4902827860697000
 Transform:
@@ -231,14 +228,14 @@ Transform:
   m_GameObject: {fileID: 1020951025553214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4198327326274978}
   - {fileID: 4270492182888268}
   - {fileID: 4111622061712344}
+  - {fileID: 4201324300959622}
   - {fileID: 4677743267763446}
   - {fileID: 4401485563621622}
-  - {fileID: 4201324300959622}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -249,6 +246,26 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1457199703985054}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &50094856467494666
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020951025553214}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -321,7 +338,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &50826185748909062
 Rigidbody2D:
   serializedVersion: 4
@@ -502,78 +519,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 1.7}
   m_EdgeRadius: 0
---- !u!114 &114156401267466066
+--- !u!114 &114773103692419252
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1577714418631072}
+  m_GameObject: {fileID: 1020951025553214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14736aafd50332e4a9750bf37e180638, type: 3}
+  m_Script: {fileID: 11500000, guid: 77b00c09665c1264ca77aca879afa9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottleForce: 0
---- !u!114 &114267266576042402
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1008436087124674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14736aafd50332e4a9750bf37e180638, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottleForce: 0
---- !u!114 &114402889559761296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1457199703985054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14736aafd50332e4a9750bf37e180638, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottleForce: 0
---- !u!114 &114781216078171166
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1882823852325690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14736aafd50332e4a9750bf37e180638, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottleForce: 0
---- !u!114 &114814255207919884
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1923527369086788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14736aafd50332e4a9750bf37e180638, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottleForce: 0
---- !u!114 &114891459956350860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1051657128241106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14736aafd50332e4a9750bf37e180638, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bottleForce: 0
+  itemForce: 500
+  direction: 0
+  playerNum: 1
+  moveSpeed: 1
 --- !u!212 &212031074907997886
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -617,6 +577,50 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+--- !u!212 &212172664746257936
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020951025553214}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3, y: 5.75}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!212 &212305945500506352
 SpriteRenderer:
@@ -905,8 +909,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -90
-    m_UpperAngle: 90
+    m_LowerAngle: -270
+    m_UpperAngle: -90
 --- !u!233 &233564053246746482
 HingeJoint2D:
   m_ObjectHideFlags: 1
