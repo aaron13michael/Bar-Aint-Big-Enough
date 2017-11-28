@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
 	private Rigidbody2D rb;
 	private Animator animator;
 
+	private bool grounded;
+
     // Use this for initialization
     void Start () 
 	{
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
 
 		jumpCD = 1.5f;
 		prevJumpTime = -2.0f;
-
+		grounded = true;
 		rb = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
 	}
@@ -68,6 +70,9 @@ public class Player : MonoBehaviour
 
             drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
         }
+
+		//grounded = false;
+		//animator.SetBool ("Grounded", false);
 	}
 
     void ProcessInput()
@@ -106,7 +111,7 @@ public class Player : MonoBehaviour
         }
 
 		// Jump
-		if(jumpBtn && (Time.time - prevJumpTime) >= jumpCD)
+		if(jumpBtn && grounded)
 		{
 			prevJumpTime = Time.time;
 			rb.velocity = new Vector2 (rb.velocity.x, 8.5f);
@@ -117,6 +122,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
 		bool pickupBtn = Input.GetButton ("Pickup" + playerNum);
+
 
         if (health >= 1)
         {
@@ -181,6 +187,12 @@ public class Player : MonoBehaviour
             }
             Debug.Log("Within trigger");
         }
+
+		if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs") 
+		{
+			grounded = true;
+			animator.SetBool ("Grounded", true);
+		}
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -190,6 +202,12 @@ public class Player : MonoBehaviour
             Debug.Log("Exited trigger");
             other.gameObject.GetComponent<Collider2D>().isTrigger = true;
         }
+
+		if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs") 
+		{
+			grounded = false;
+			animator.SetBool ("Grounded", false);
+		}
     }
 
     
