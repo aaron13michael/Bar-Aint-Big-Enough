@@ -14,24 +14,24 @@ public class Throwable : MonoBehaviour {
 	public bool onGround = true;
 
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
 		
 	}
 
-    void OnCollisionEnter2D(Collision2D other)
+    public virtual void OnCollisionEnter2D(Collision2D other)
     {
-		// if the bottle is thrown
+		// if the object is thrown
         if (thrown)
         {
 			// onGround is false
 			onGround = false;
 
-			// if the first object the thrown bottle hits is terrain
+			// if the first object the thrown object hits is terrain
 			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs")
             {
                 thrown = false;
