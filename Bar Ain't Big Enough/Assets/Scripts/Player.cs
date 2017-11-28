@@ -25,16 +25,11 @@ public class Player : MonoBehaviour
 	// Is this player 1, 2, 3, or 4?
 	public int playerNum;
 
-	private float pickupTime;
-
 	private float jumpCD ; // cooldown timer on jumps
 	public float prevJumpTime; // the last time that jump was used
 
 	private Rigidbody2D rb;
 	private Animator animator;
-
-	public float maxVel;
-
 
     // Use this for initialization
     void Start () 
@@ -46,7 +41,6 @@ public class Player : MonoBehaviour
 			playerNum = 1;
 		}
 
-		pickupTime = 0.0f;
 		jumpCD = 1.5f;
 		prevJumpTime = -2.0f;
 
@@ -81,39 +75,24 @@ public class Player : MonoBehaviour
 		bool jumpBtn = Input.GetButton("Jump" + playerNum);
 		bool throwBtn = Input.GetButton("Throw" + playerNum);
 
-
+		// Run
 		if(xAxis > 0) 
 		{
-			rb.AddForce (new Vector2(20.0f, 0.0f));
+			rb.velocity = new Vector2 (7.0f, rb.velocity.y);
 			animator.SetFloat ("xVelocity", rb.velocity.x);
 		}
-		if(xAxis < 0)
+		else if(xAxis < 0)
 		{
-			rb.AddForce (new Vector2(-20.0f, 0.0f));
+			rb.velocity = new Vector2 (-7.0f, rb.velocity.y);
 			animator.SetFloat ("xVelocity", rb.velocity.x);
 		}
 		else if(xAxis == 0)
 		{
-			Vector2 currentVel = rb.velocity;
-			currentVel.x *= 0.0f;
-			rb.velocity = currentVel;
+			rb.velocity = new Vector2 (0.0f, rb.velocity.y);
 			animator.SetFloat ("xVelocity", rb.velocity.x);
 		}
 
-		Vector2 velocity = new Vector2(maxVel, 0.0f); 
-		if (Mathf.Abs(rb.velocity.x) > maxVel) 
-		{
-			if (rb.velocity.x > 0.0f) 
-			{
-				rb.velocity = velocity;
-			}
-			else 
-			{
-				rb.velocity = -velocity;
-			}
-		}
-		animator.SetFloat ("xVelocity", rb.velocity.x);
-
+		// Throw
 		if(throwBtn && hasPickup)
 		{
 			hasPickup = false;
@@ -124,18 +103,13 @@ public class Player : MonoBehaviour
             heldItem.GetComponent<Throwable>().thrown = true;
         }
 
+		// Jump
 		if(jumpBtn && (Time.time - prevJumpTime) >= jumpCD)
 		{
 			prevJumpTime = Time.time;
-			rb.AddForce (new Vector2(0.0f, 2000.0f));
+			rb.velocity = new Vector2 (rb.velocity.x, 7.0f);
 			animator.SetTrigger ("Jump");
-		}
-		if (yAxis < 0) // drop faster by holding down on the joystick's yaxis
-		{
-			rb.AddForce (new Vector2(0.0f, -20.0f));
-		}
-		
-		animator.SetFloat ("yVelocity", rb.velocity.y);
+		}	
     }
 
     void OnCollisionEnter2D(Collision2D other)
