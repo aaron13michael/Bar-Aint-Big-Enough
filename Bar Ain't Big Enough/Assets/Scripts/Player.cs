@@ -156,9 +156,9 @@ public class Player : MonoBehaviour
 				{
 					hasPickup = true;
 					Destroy(other.rigidbody);
-					other.gameObject.transform.parent = this.transform;
-					other.transform.position = this.transform.position + new Vector3(1.0f, 0.1f);
-					heldItem = other.gameObject;
+                    other.gameObject.transform.parent = GameObject.FindGameObjectWithTag("ThrowingHand").transform;
+					other.transform.position = GameObject.FindGameObjectWithTag("ThrowingHand").transform.position;
+                    heldItem = other.gameObject;
 				}
 		}
 

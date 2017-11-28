@@ -541,6 +541,34 @@ Transform:
   m_Father: {fileID: 1873920832}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &173362194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 173362195}
+  m_Layer: 0
+  m_Name: BottlePosition
+  m_TagString: ThrowingHand
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &173362195
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 173362194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1752667588}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214095468
 GameObject:
   m_ObjectHideFlags: 0
@@ -3045,6 +3073,11 @@ Transform:
   m_Father: {fileID: 1873920832}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1752667588 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4497771940231096, guid: d13101e3847918b42a46db4de0d3e0d4,
+    type: 2}
+  m_PrefabInternal: {fileID: 291548467}
 --- !u!4 &1785861439 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4165572396560086, guid: 9a60c190e98148e4598db64f6ecb2135,
