@@ -212,6 +212,12 @@ public class Player : MonoBehaviour
                 other.gameObject.GetComponent<Collider2D>().isTrigger = true;
             }
         }
+
+		// check if player is being punched
+		if (other.gameObject.tag == "PunchArm") 
+		{
+			health -= 33.5; 
+		}
     }
 
     void OnCollisionStay2D(Collision2D other)
