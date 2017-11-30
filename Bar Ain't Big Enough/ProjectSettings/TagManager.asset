@@ -16,6 +16,7 @@ TagManager:
   - Stairs
   - Player1
   - PlayerUI
+  - Wall
   layers:
   - Default
   - TransparentFX

@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
 
 			if(xAxis == 0 && yAxis == 0)
 			{
-				heldItem.AddComponent<Rigidbody2D>(); //Drop bottle
+				heldItem.AddComponent<Rigidbody2D>(); //Drop
 
 				if(heldItem.transform.position.x > this.gameObject.transform.position.x)
 				{
@@ -169,10 +169,10 @@ public class Player : MonoBehaviour
             if (heldItem.GetComponent<Bottle>().bState == Bottle.BottleState.Full)
             {
                 heldItem.GetComponent<Bottle>().bState = Bottle.BottleState.Empty;
-                drunkeness += 20;
+				applyDrunk(20);
                 if (drunkeness >= 100)
                 {
-                    Object.Destroy(gameObject);
+					Death();
                 }
             }
         }
@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
             Debug.Log("Within trigger");
         }
 
-		if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs") 
+		if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs" || other.gameObject.tag == "Wall") 
 		{
 			grounded = true;
 			animator.SetBool ("Grounded", true);
@@ -303,6 +303,12 @@ public class Player : MonoBehaviour
 
     void Death()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.clear;
+		if(hasPickup)
+		{
+			heldItem.transform.parent = null;
+			heldItem.AddComponent<Rigidbody2D>();
+		}
+
+		Destroy(this.gameObject);
     }
 }
