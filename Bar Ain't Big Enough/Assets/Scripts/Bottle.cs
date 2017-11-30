@@ -53,7 +53,6 @@ public class Bottle : Throwable {
 			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs" || other.gameObject.tag == "Wall")
 			{
 				thrown = false;
-				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-gameObject.GetComponent<Rigidbody2D>().velocity.x * .8f, -gameObject.GetComponent<Rigidbody2D>().velocity.y * .8f));
 
 				if(bState == BottleState.Broken)
 				{
@@ -84,11 +83,6 @@ public class Bottle : Throwable {
 
 				other.gameObject.GetComponent<Player>().applyDamage(50);
 			}
-		}
-		else
-		{
-
-
 		}
 	}
 
