@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
 	// player health
     int health;
-    public int drunkeness;
 
 	// checks if player is holding a pick up
     bool hasPickup = false;
@@ -25,14 +24,16 @@ public class Player : MonoBehaviour
 
 	// Is this player 1, 2, 3, or 4?
 	public int playerNum;
+	public float moveSpeed;
 
 	public float prevJumpTime; // the last time that jump was used
-    public float drunkDecreaseCD; //time since the drunk meter last went down
 
 	private Rigidbody2D rb;
 	private Animator animator;
 
 	private bool grounded;
+	private float drunkDecreaseCD; //time since the drunk meter last went down
+	private int drunkeness;
     private float modifier; //value for modifying throw strength and movement speed for being drunk
 
     //UI Meters
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour
             
             if (drunkeness > 0)
             {
-                modifier = 1.0f + (drunkeness / 500.0f);
+                modifier = 1.0f + (drunkeness / 100.0f);
             }
             else
             {
@@ -112,12 +113,12 @@ public class Player : MonoBehaviour
 		// Run
 		if(xAxis > 0) 
 		{
-			rb.velocity = new Vector2 (7.0f * modifier, rb.velocity.y);
+			rb.velocity = new Vector2 (moveSpeed / modifier, rb.velocity.y);
 			animator.SetBool ("Right", true);
 		}
 		else if(xAxis < 0)
 		{
-			rb.velocity = new Vector2 (-7.0f * modifier, rb.velocity.y);
+			rb.velocity = new Vector2 (-moveSpeed / modifier, rb.velocity.y);
 			animator.SetBool ("Right", false);
 		}
 		else if(xAxis == 0)
@@ -160,7 +161,7 @@ public class Player : MonoBehaviour
 				}
 
 				heldItem.AddComponent<Rigidbody2D>();
-				heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * xAxis, itemForce * yAxis));
+				heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * modifier * xAxis, itemForce * modifier * yAxis));
 				heldItem.GetComponent<Throwable>().thrown = true;	
 			}
 				

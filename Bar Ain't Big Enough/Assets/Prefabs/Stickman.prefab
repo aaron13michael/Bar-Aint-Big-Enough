@@ -725,11 +725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b00c09665c1264ca77aca879afa9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Label: 
+  heldItem: {fileID: 0}
+  footCollider: {fileID: 0}
   itemForce: 500
   direction: 0
   playerNum: 1
+  moveSpeed: 10
   prevJumpTime: 0
-  maxVel: 7
 --- !u!114 &114222657503782498
 MonoBehaviour:
   m_ObjectHideFlags: 1
