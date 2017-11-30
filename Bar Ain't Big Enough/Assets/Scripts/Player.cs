@@ -56,9 +56,11 @@ public class Player : MonoBehaviour
 		animator = GetComponent<Animator> ();
 		animator.SetBool ("Right", true);
 
-        drunkMeter = GameObject.FindGameObjectsWithTag("PlayerUI")[playerNum - 1].transform.GetChild(2);
-        healthMeter = GameObject.FindGameObjectsWithTag("PlayerUI")[playerNum - 1].transform.GetChild(1);
-        UI = GameObject.FindGameObjectsWithTag("PlayerUI")[playerNum - 1].GetComponent<PlayerUI>();
+		GameObject uiParent = GameObject.Find ("Player" + playerNum + "UI");
+
+		drunkMeter = uiParent.transform.GetChild(2);
+		healthMeter = uiParent.transform.GetChild(1);
+		UI = uiParent.GetComponent<PlayerUI>();
     }
 	
 	// Update is called once per frame
