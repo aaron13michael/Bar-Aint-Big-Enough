@@ -193,9 +193,9 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Bottle")
+		if (!hasPickup)
         {
-				if (!hasPickup)
+			if (other.gameObject.tag == "Bottle")
 				{
 					hasPickup = true;
 					Destroy(other.rigidbody);
