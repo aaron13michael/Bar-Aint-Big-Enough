@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 	// player health
     int health;
 
+	bool dead = false;
+
 	// checks if player is holding a pick up
     bool hasPickup = false;
 
@@ -27,6 +29,9 @@ public class Player : MonoBehaviour
 	public float moveSpeed;
 
 	public float prevJumpTime; // the last time that jump was used
+
+	public AudioClip gulpSound;
+	private AudioSource audio;
 
 	private Rigidbody2D rb;
 	private Animator animator;
@@ -54,6 +59,7 @@ public class Player : MonoBehaviour
 		prevJumpTime = -2.0f;
 		grounded = true;
 		rb = GetComponent<Rigidbody2D> ();
+		audio = GetComponent<AudioSource>();
 		animator = GetComponent<Animator> ();
 		animator.SetBool ("Right", true);
 
@@ -62,6 +68,7 @@ public class Player : MonoBehaviour
 		drunkMeter = uiParent.transform.GetChild(2);
 		healthMeter = uiParent.transform.GetChild(1);
 		UI = uiParent.GetComponent<PlayerUI>();
+
     }
 	
 	// Update is called once per frame
@@ -104,6 +111,7 @@ public class Player : MonoBehaviour
 
     void ProcessInput()
     {
+		if(dead) {return;}
 		float xAxis = Input.GetAxis("LeftX" + playerNum);
 		float yAxis = Input.GetAxis("LeftY" + playerNum);
 		bool jumpBtn = Input.GetButton("Jump" + playerNum);
@@ -173,6 +181,7 @@ public class Player : MonoBehaviour
             {
                 heldItem.GetComponent<Bottle>().bState = Bottle.BottleState.Empty;
 				applyDrunk(20);
+				PlaySound(gulpSound, 0.5f);
                 if (drunkeness >= 100)
                 {
 					Death();
@@ -310,14 +319,35 @@ public class Player : MonoBehaviour
         drunkApply = false;
     }
 
+	//Plays a clip at a certain volume. Randomizes pitch slightly.
+	private void PlaySound(AudioClip clip, float volume)
+	{
+		float pitchAmount = Random.Range(-0.4f, 0.4f);
+
+		audio.clip = clip;
+		audio.volume = volume;
+		audio.pitch = 1.0f + pitchAmount;
+		audio.Play();
+	}
+
     void Death()
     {
+		dead = true;
+
 		if(hasPickup)
 		{
 			heldItem.transform.parent = null;
 			heldItem.AddComponent<Rigidbody2D>();
 		}
 
-		Destroy(this.gameObject);
+		if(audio.isPlaying)
+		{
+			Destroy (gameObject, audio.clip.length);	
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+			
     }
 }

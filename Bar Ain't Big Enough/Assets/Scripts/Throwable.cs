@@ -52,4 +52,10 @@ public class Throwable : MonoBehaviour {
        
         }
     }
+
+	//Destroys this item
+	protected virtual void DestroyThrowable()
+	{
+		Destroy(gameObject);	
+	}
 }

@@ -53,15 +53,15 @@ public class Bottle : Throwable {
 			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs" || other.gameObject.tag == "Wall")
 			{
 				thrown = false;
+				PlayBreak();
 
 				if(bState == BottleState.Broken)
 				{
-					Destroy(this.gameObject); 
+					DestroyThrowable();
 				}
 				else
 				{
 					bState = BottleState.Broken;
-					PlayBreak();
 				}
 			}
 
@@ -74,7 +74,7 @@ public class Bottle : Throwable {
 
 				if(bState == BottleState.Broken)
 				{
-					Destroy(this.gameObject); 
+					DestroyThrowable();
 				}
 				else
 				{
@@ -91,7 +91,22 @@ public class Bottle : Throwable {
 	{
 		int breakIndex = Random.Range(0, bBreak.Length);
 
+		float pitchAmount = Random.Range(-0.4f, 0.4f);
+
 		audio.clip = bBreak[breakIndex];
+		audio.pitch = 1.0f + pitchAmount;
 		audio.Play();
+	}
+
+	protected override void DestroyThrowable()
+	{
+		if(audio.isPlaying)
+		{
+			Destroy (gameObject, audio.clip.length);	
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
 	}
 }
