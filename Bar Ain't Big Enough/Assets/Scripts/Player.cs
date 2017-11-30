@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
 	// player health
     int health;
-    int drunkeness;
+    public int drunkeness;
 
 	// checks if player is holding a pick up
     bool hasPickup = false;
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
 
 	private float jumpCD ; // cooldown timer on jumps
 	public float prevJumpTime; // the last time that jump was used
+    public float drunkDecreaseCD; //time since the drunk meter last went down
 
 	private Rigidbody2D rb;
 	private Animator animator;
@@ -35,11 +36,16 @@ public class Player : MonoBehaviour
 	private bool grounded;
     private float modifier; //value for modifying throw strength and movement speed for being drunk
 
+    //UI Meters
+    Transform drunkMeter;
+    Transform healthMeter;
+    PlayerUI UI;
+
     // Use this for initialization
     void Start () 
 	{
         health = 100;
-        drunkeness = 0;
+        drunkeness = 50;
 		if(playerNum > 4 || playerNum <= 0)
 		{
 			playerNum = 1;
@@ -51,7 +57,11 @@ public class Player : MonoBehaviour
 		rb = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
 		animator.SetBool ("Right", true);
-	}
+
+        drunkMeter = GameObject.FindGameObjectsWithTag("PlayerUI")[playerNum - 1].transform.GetChild(2);
+        healthMeter = GameObject.FindGameObjectsWithTag("PlayerUI")[playerNum - 1].transform.GetChild(1);
+        UI = GameObject.FindGameObjectsWithTag("PlayerUI")[playerNum - 1].GetComponent<PlayerUI>();
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -66,11 +76,17 @@ public class Player : MonoBehaviour
 
 			// UI Meter
             //Slowly decrease drunkeness level
-            //Transform drunkMeter = gameObject.transform.parent.GetChild(0).GetChild(2);
-            //if (drunkMeter.transform.childCount > 0 && !drunkApply)
-                //Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
-
-            drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
+            if (drunkMeter.transform.childCount > 0 && !drunkApply && drunkDecreaseCD >= 0.5f)
+            {
+                Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
+                drunkDecreaseCD = 0;
+                drunkeness = drunkeness > 0 ? drunkeness - 1 : 0;
+            }
+            else
+            {
+                drunkDecreaseCD += Time.deltaTime;
+            }
+            
             if (drunkeness > 0)
             {
                 modifier = 1.0f + (drunkeness / 500.0f);
@@ -125,8 +141,8 @@ public class Player : MonoBehaviour
             if (heldItem.GetComponent<Bottle>().bState == Bottle.BottleState.Full)
             {
                 heldItem.GetComponent<Bottle>().bState = Bottle.BottleState.Empty;
-                drunkeness += 500;
-                if (drunkeness >= 1000)
+                drunkeness += 20;
+                if (drunkeness >= 100)
                 {
                     Object.Destroy(gameObject);
                 }
@@ -235,14 +251,13 @@ public class Player : MonoBehaviour
     /// Applies damage to the player and reflects damage taken through health meter
     /// </summary>
     /// <param name="damage">How much damage the player has taken (out of 100)</param>
-    void applyDamage(int damage)
+    public void applyDamage(int damage)
     {
         //Used to update health meter
         int oldHealth = health;
 
         //Check that health does not go below 0
         health = health - damage > 0 ? health - damage : 0;
-        Transform healthMeter = gameObject.transform.parent.GetChild(0).GetChild(1);
         for(int h = oldHealth; h > health; h--)
         {
             Destroy(healthMeter.transform.GetChild(h - 1).gameObject);
@@ -255,9 +270,9 @@ public class Player : MonoBehaviour
     /// <param name="amount">New value of the player's drunkeness out of 1000</param>
     void applyDrunk(int amount)
     {
-        drunkeness = drunkeness + amount < 1000 ? drunkeness + amount : 1000;
+        drunkeness = drunkeness + amount < 100 ? drunkeness + amount : 100;
         drunkApply = true;
-        gameObject.transform.parent.GetChild(0).gameObject.GetComponent<PlayerUI>().createDrunkMeter(drunkeness);
+        UI.createDrunkMeter(drunkeness);
         drunkApply = false;
     }
 

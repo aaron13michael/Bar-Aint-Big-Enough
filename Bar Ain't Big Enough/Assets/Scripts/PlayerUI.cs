@@ -12,8 +12,8 @@ public class PlayerUI : MonoBehaviour {
         // Generate Health Meter. This assumes the Player UI is the first child of the Player GameObject
         createHealthMeter();
 
-        // Generate Drunk Metter
-        createDrunkMeter(1000);
+        // Generate Drunk Meter
+        createDrunkMeter(50);
     }
 	
 	// Update is called once per frame
@@ -28,9 +28,9 @@ public class PlayerUI : MonoBehaviour {
         {
             GameObject healthChunk = new GameObject("health chunk", typeof(SpriteRenderer));
             healthChunk.GetComponent<SpriteRenderer>().sprite = healthSprite;
-            healthChunk.transform.localScale = new Vector3(0.6f, 4.0f, 1.0f);
+            healthChunk.transform.localScale = new Vector3(1f, 7.0f, 1.0f);
             healthChunk.transform.SetParent(healthMeter);
-            healthChunk.transform.localPosition = new Vector3(i * 0.042f, 0.0f, 0.0f);
+            healthChunk.transform.localPosition = new Vector3(i * 0.07f, 0.0f, 0.0f);
         }
     }
     /// <summary>
@@ -44,13 +44,13 @@ public class PlayerUI : MonoBehaviour {
         for (int i = drunkMeter.childCount; i < drunkLevel; i++)
         {
             
-            if (drunkMeter.childCount > 1000) break; // don't go over 1000 drunk levels
+            if (drunkMeter.childCount > 100) break; // don't go over 100 drunk levels
           
             GameObject drunkChunk = new GameObject("drunk chunk", typeof(SpriteRenderer));
             drunkChunk.GetComponent<SpriteRenderer>().sprite = drunkSprite;
-            drunkChunk.transform.localScale = new Vector3(0.06f, 4.0f, 1.0f);
+            drunkChunk.transform.localScale = new Vector3(1f, 7.0f, 1.0f);
             drunkChunk.transform.SetParent(drunkMeter);
-            drunkChunk.transform.localPosition = new Vector3(i * 0.0042f, 0.0f, 0.0f);
+            drunkChunk.transform.localPosition = new Vector3(i * 0.07f, 0.0f, 0.0f);
         }
     }
 
