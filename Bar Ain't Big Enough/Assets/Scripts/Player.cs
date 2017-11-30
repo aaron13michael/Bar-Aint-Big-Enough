@@ -216,7 +216,7 @@ public class Player : MonoBehaviour
 		// check if player is being punched
 		if (other.gameObject.tag == "PunchArm") 
 		{
-			health -= 33.5; 
+			health -= 34; 
 		}
     }
 
