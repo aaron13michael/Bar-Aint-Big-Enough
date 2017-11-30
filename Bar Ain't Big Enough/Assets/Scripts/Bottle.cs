@@ -25,6 +25,8 @@ public class Bottle : Throwable {
 	// Update is called once per frame
 	public override void Update () 
 	{
+		gameObject.transform.rotation = new Quaternion (0.0f, 0.0f, 0.0f, 0.0f); // Keeps the bottle from rotation along the Z axis
+
 		switch(bState)
 		{
 			case BottleState.Full:
@@ -55,7 +57,7 @@ public class Bottle : Throwable {
 
 				if(bState == BottleState.Broken)
 				{
-					//Destroy(this.gameObject); Will destroy once bottles spawn
+					Destroy(this.gameObject); 
 				}
 				else
 				{
@@ -70,7 +72,7 @@ public class Bottle : Throwable {
 
 				if(bState == BottleState.Broken)
 				{
-					//Destroy(this.gameObject); Will destroy once bottles spawn
+					Destroy(this.gameObject); 
 				}
 				else
 				{

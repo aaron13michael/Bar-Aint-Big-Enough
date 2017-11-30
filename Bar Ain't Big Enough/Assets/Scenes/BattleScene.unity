@@ -569,6 +569,11 @@ Transform:
   m_Father: {fileID: 1873920832}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &154009883 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4497771940231096, guid: d13101e3847918b42a46db4de0d3e0d4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1136541285}
 --- !u!1 &173362194
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 173362195}
   m_Layer: 0
-  m_Name: BottlePosition
+  m_Name: Hand1
   m_TagString: ThrowingHand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2305,6 +2310,34 @@ Transform:
   m_Father: {fileID: 1873920832}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1002231214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1002231215}
+  m_Layer: 0
+  m_Name: Hand2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1002231215
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002231214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1587900381}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1009533407
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,6 +3428,11 @@ Transform:
   m_Father: {fileID: 1873920832}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1587900381 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4497771940231096, guid: d13101e3847918b42a46db4de0d3e0d4,
+    type: 2}
+  m_PrefabInternal: {fileID: 243015935}
 --- !u!1 &1648140098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3650,6 +3688,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4165572396560086, guid: 9a60c190e98148e4598db64f6ecb2135,
     type: 2}
   m_PrefabInternal: {fileID: 848137784}
+--- !u!1 &1813165980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1813165981}
+  m_Layer: 0
+  m_Name: Hand3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1813165981
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813165980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 154009883}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1837154721
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,6 +4278,11 @@ Transform:
   m_Father: {fileID: 1873920832}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2050743131 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4497771940231096, guid: d13101e3847918b42a46db4de0d3e0d4,
+    type: 2}
+  m_PrefabInternal: {fileID: 79376712}
 --- !u!1 &2090583891
 GameObject:
   m_ObjectHideFlags: 0
@@ -4239,4 +4310,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 496304622}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2113202902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2113202903}
+  m_Layer: 0
+  m_Name: Hand4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2113202903
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2113202902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2050743131}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

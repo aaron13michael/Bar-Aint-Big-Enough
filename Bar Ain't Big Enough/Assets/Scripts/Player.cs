@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
 	// Is this player 1, 2, 3, or 4?
 	public int playerNum;
 
-	private float jumpCD ; // cooldown timer on jumps
 	public float prevJumpTime; // the last time that jump was used
     public float drunkDecreaseCD; //time since the drunk meter last went down
 
@@ -50,8 +49,7 @@ public class Player : MonoBehaviour
 		{
 			playerNum = 1;
 		}
-
-		jumpCD = 1.5f;
+			
 		prevJumpTime = -2.0f;
 		grounded = true;
 		rb = GetComponent<Rigidbody2D> ();
@@ -163,17 +161,14 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-		bool pickupBtn = Input.GetButton ("Pickup" + playerNum);
-
-
         if (other.gameObject.tag == "Bottle")
         {
 				if (!hasPickup)
 				{
 					hasPickup = true;
 					Destroy(other.rigidbody);
-                    other.gameObject.transform.parent = GameObject.FindGameObjectWithTag("ThrowingHand").transform;
-					other.transform.position = GameObject.FindGameObjectWithTag("ThrowingHand").transform.position;
+				    other.gameObject.transform.parent = GameObject.Find("Hand" + playerNum).transform;
+					other.transform.position = GameObject.Find("Hand" + playerNum).transform.position;
                     heldItem = other.gameObject;
 				}
 		}
