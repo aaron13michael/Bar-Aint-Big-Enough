@@ -128,13 +128,43 @@ public class Player : MonoBehaviour
 		{
 			hasPickup = false;
 			heldItem.transform.parent = null;
-			heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Round(xAxis)) * (Mathf.Cos(xAxis)) * modifier, 2.5f * (Mathf.Sin(yAxis)) * modifier, 0.0f);
-			heldItem.AddComponent<Rigidbody2D>();
-            heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * xAxis, itemForce * yAxis));
-            heldItem.GetComponent<Throwable>().thrown = true;
+
+			if(xAxis == 0 && yAxis == 0)
+			{
+				heldItem.AddComponent<Rigidbody2D>(); //Drop bottle
+
+				if(heldItem.transform.position.x > this.gameObject.transform.position.x)
+				{
+					heldItem.transform.position = this.transform.position + new Vector3(0.7f, -0.7f, 0.0f);		
+				}
+				else
+				{
+					heldItem.transform.position = this.transform.position + new Vector3(-0.7f, -0.7f, 0.0f);	
+				}
+			}
+			else
+			{
+				if(xAxis > 0)
+				{
+					heldItem.transform.position = this.transform.position + new Vector3(2.5f * (Mathf.Cos(xAxis)), 2.5f * (Mathf.Sin(yAxis)), 0.0f);
+				}
+				else if(xAxis < 0)
+				{
+					heldItem.transform.position = this.transform.position + new Vector3(-2.5f * (Mathf.Cos(xAxis)), 2.5f * (Mathf.Sin(yAxis)), 0.0f);
+				}
+				else
+				{
+					heldItem.transform.position = this.transform.position + new Vector3(0.0f, 2.5f * (Mathf.Sin(yAxis)), 0.0f);	
+				}
+
+				heldItem.AddComponent<Rigidbody2D>();
+				heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * xAxis, itemForce * yAxis));
+				heldItem.GetComponent<Throwable>().thrown = true;	
+			}
+				
         }
         // Drink bottle
-        if (useBtn && hasPickup)
+        if(useBtn && hasPickup)
         {
             if (heldItem.GetComponent<Bottle>().bState == Bottle.BottleState.Full)
             {

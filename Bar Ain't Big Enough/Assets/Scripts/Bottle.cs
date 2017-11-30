@@ -69,6 +69,10 @@ public class Bottle : Throwable {
 			// if the first object the thrown bottle hits is a person and kills the person
 			if (other.gameObject.tag == "Player" && !onGround) 
 			{
+				PlayBreak();
+				Destroy (other.gameObject);
+				thrown = false;
+				onGround = true;
 
 				if(bState == BottleState.Broken)
 				{
@@ -77,12 +81,7 @@ public class Bottle : Throwable {
 				else
 				{
 					bState = BottleState.Broken;
-					PlayBreak();
 				}
-
-				Destroy (other.gameObject);
-				thrown = false;
-				onGround = true;
 			}
 		}
 		else
