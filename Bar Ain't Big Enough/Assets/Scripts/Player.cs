@@ -225,7 +225,7 @@ public class Player : MonoBehaviour
             Debug.Log("Within trigger");
         }
 
-		if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs" || other.gameObject.tag == "Wall") 
+		if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs") 
 		{
 			grounded = true;
 			animator.SetBool ("Grounded", true);
