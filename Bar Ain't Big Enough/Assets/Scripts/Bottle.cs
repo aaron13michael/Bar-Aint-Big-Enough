@@ -70,7 +70,6 @@ public class Bottle : Throwable {
 			if (other.gameObject.tag == "Player" && !onGround) 
 			{
 				PlayBreak();
-				Destroy (other.gameObject);
 				thrown = false;
 				onGround = true;
 
