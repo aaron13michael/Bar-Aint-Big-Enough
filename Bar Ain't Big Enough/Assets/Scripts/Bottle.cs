@@ -100,13 +100,15 @@ public class Bottle : Throwable {
 
 	protected override void DestroyThrowable()
 	{
-		if(audio.isPlaying)
+/*		if(audio.isPlaying)
 		{
 			Destroy (gameObject, audio.clip.length);	
 		}
 		else
 		{
 			Destroy(gameObject);
-		}
+		}*/
+
+		Destroy(gameObject);
 	}
 }
