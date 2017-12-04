@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour 
 {
 	// player health
-    int health;
+    public int health;
 
 	bool dead = false;
 
