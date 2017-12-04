@@ -105,8 +105,20 @@ public class Player : MonoBehaviour
             }
         }
 
-		//grounded = false;
-		//animator.SetBool ("Grounded", false);
+		// Apply extra gravity to the player
+		rb.AddForce(new Vector2(0.0f, -8.0f));
+
+		if (!grounded) 
+		{
+			if (animator.GetBool("Right")) 
+			{
+				rb.AddForce (new Vector2 (-20.0f, 0.0f));
+			}
+			else 
+			{
+				rb.AddForce (new Vector2 (20.0f, 0.0f));
+			}
+		}
 	}
 
     void ProcessInput()
@@ -121,17 +133,27 @@ public class Player : MonoBehaviour
 		// Run
 		if(xAxis > 0) 
 		{
-			rb.velocity = new Vector2 (moveSpeed / modifier, rb.velocity.y);
+			rb.AddForce (new Vector2 (30.0f, 0.0f));
 			animator.SetBool ("Right", true);
 		}
 		else if(xAxis < 0)
 		{
-			rb.velocity = new Vector2 (-moveSpeed / modifier, rb.velocity.y);
+			rb.AddForce (new Vector2 (-30.0f, 0.0f));
 			animator.SetBool ("Right", false);
 		}
 		else if(xAxis == 0)
 		{
 			rb.velocity = new Vector2 (0.0f, rb.velocity.y);
+		}
+
+		// Make sure the player is not going too fast
+		if (rb.velocity.x > 7.0f) 
+		{
+			rb.velocity = new Vector2 (7.0f, rb.velocity.y);
+		}
+		if (rb.velocity.x < -7.0f) 
+		{
+			rb.velocity = new Vector2 (-7.0f, rb.velocity.y);
 		}
 
 		// Throw
@@ -203,16 +225,16 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-		if (!hasPickup)
-        {
-			if (other.gameObject.tag == "Bottle")
-				{
-					hasPickup = true;
-					Destroy(other.rigidbody);
-				    other.gameObject.transform.parent = GameObject.Find("Hand" + playerNum).transform;
-					other.transform.position = GameObject.Find("Hand" + playerNum).transform.position;
-                    heldItem = other.gameObject;
-				}
+		if (!hasPickup) 
+		{
+			if (other.gameObject.tag == "Bottle") 
+			{
+				hasPickup = true;
+				Destroy (other.rigidbody);
+				other.gameObject.transform.parent = GameObject.Find ("Hand" + playerNum).transform;
+				other.transform.position = GameObject.Find ("Hand" + playerNum).transform.position;
+				heldItem = other.gameObject;
+			}
 		}
 
         //Check if the stairs are below the player's feet.
