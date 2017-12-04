@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 		if (players.Count <= 1) 
 		{
 			// set the player num as the winning player through PlayerPrefs
-			int pNum = players [0].GetComponent<Player> ().playerNum;
+			string pNum = players [0].GetComponent<Player> ().playerNum.ToString();
 			PlayerPrefs.SetString (pNum, "Player " + pNum + " Wins!");
 		} 
 		// if there are more than one player alive
