@@ -6,6 +6,7 @@ public class SpawnBottles : MonoBehaviour {
 
     public GameObject[] spawnLocations;
     public GameObject bottle;
+	public float spawnTime;
 
     float timer;
 
@@ -22,7 +23,7 @@ public class SpawnBottles : MonoBehaviour {
 
     void SpawnBottle()
     {
-        if (timer > 2.0f)
+		if (timer > spawnTime)
         {
             int random = Random.Range(0, spawnLocations.Length);
             Instantiate(bottle, spawnLocations[random].GetComponent<Transform>().position, Quaternion.identity);

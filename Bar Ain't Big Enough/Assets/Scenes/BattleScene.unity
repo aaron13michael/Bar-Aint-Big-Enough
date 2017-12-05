@@ -541,8 +541,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 94340249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.018, y: -5.2, z: 1}
-  m_LocalScale: {x: 0.26172695, y: 0.26172695, z: 0.26172695}
+  m_LocalPosition: {x: 5.921, y: -5.669, z: 1}
+  m_LocalScale: {x: 0.22418192, y: 0.22418192, z: 0.22418192}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -2250,6 +2250,7 @@ MonoBehaviour:
   - {fileID: 1445074928}
   - {fileID: 1138287160}
   bottle: {fileID: 1039304924082456, guid: 9a60c190e98148e4598db64f6ecb2135, type: 2}
+  spawnTime: 5
 --- !u!4 &943063714
 Transform:
   m_ObjectHideFlags: 0
@@ -3102,8 +3103,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1470952264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.76, y: 2.7, z: 17.7188}
-  m_LocalScale: {x: 1592.2946, y: 77.82304, z: 239.76216}
+  m_LocalPosition: {x: -16.61, y: 2.15, z: 17.7188}
+  m_LocalScale: {x: 2212.461, y: 77.82304, z: 239.76216}
   m_Children: []
   m_Father: {fileID: 1873920832}
   m_RootOrder: 14
