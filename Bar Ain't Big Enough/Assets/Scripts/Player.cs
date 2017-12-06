@@ -19,19 +19,18 @@ public class Player : MonoBehaviour
 
 	// gameobject to store the held item
     public GameObject heldItem;
-    public GameObject footCollider;
 	// item force and direction
     public float itemForce = 0.0f;
     public int direction = 0; 
 
 	// Is this player 1, 2, 3, or 4?
 	public int playerNum;
-	public float moveSpeed;
 
 	public float prevJumpTime; // the last time that jump was used
 
-	public AudioClip gulpSound;
 	private AudioSource audio;
+	public AudioClip gulpSound;
+	public AudioClip[] punchSounds;
 
 	private Rigidbody2D rb;
 	private Animator animator;
@@ -40,6 +39,12 @@ public class Player : MonoBehaviour
 	private float drunkDecreaseCD; //time since the drunk meter last went down
 	private int drunkeness;
     private float modifier; //value for modifying throw strength and movement speed for being drunk
+
+	//Punch variables
+	public float punchCooldown;
+	private float currPCooldown;
+	private bool isPunching;
+	Transform punchArm;
 
     //UI Meters
     Transform drunkMeter;
@@ -68,6 +73,8 @@ public class Player : MonoBehaviour
 		drunkMeter = uiParent.transform.GetChild(2);
 		healthMeter = uiParent.transform.GetChild(1);
 		UI = uiParent.GetComponent<PlayerUI>();
+
+		punchArm = transform.GetChild(5).GetChild(0).GetChild(0);
 
     }
 	
@@ -119,6 +126,17 @@ public class Player : MonoBehaviour
 				rb.AddForce (new Vector2 (20.0f, 0.0f));
 			}
 		}
+
+		//Update punch timer if currently punching
+		if (isPunching) 
+		{
+			currPCooldown += Time.deltaTime;
+
+			if (currPCooldown >= punchCooldown) 
+			{
+				isPunching = false;
+			}
+		}
 	}
 
     void ProcessInput()
@@ -129,6 +147,7 @@ public class Player : MonoBehaviour
 		bool jumpBtn = Input.GetButton("Jump" + playerNum);
 		bool throwBtn = Input.GetButton("Throw" + playerNum);
         bool useBtn = Input.GetButton("Use" + playerNum);
+		float punch = Input.GetAxis ("Punch" + playerNum);
 
 		// Run
 		if(xAxis > 0) 
@@ -212,12 +231,25 @@ public class Player : MonoBehaviour
         }
 
         // Jump
-            if(jumpBtn && grounded)
+        if(jumpBtn && grounded)
 		{
 			prevJumpTime = Time.time;
 			rb.velocity = new Vector2 (rb.velocity.x, 8.0f);
 			animator.SetTrigger ("Jump");
-		}	
+		}
+
+		//Punch
+		if (punch > 0.3f && !isPunching && !hasPickup) 
+		{
+			isPunching = true;
+			//Animator stuff goes here
+			punchArm.tag = "PunchArm";
+			currPCooldown = 0f;
+
+			int pSoundIndex = Random.Range (0, 1);
+
+			PlaySound (punchSounds[pSoundIndex], 0.6f);
+		}
 
 		animator.SetFloat ("xVelocity", rb.velocity.x);
 		animator.SetFloat ("yVelocity", rb.velocity.y);
@@ -250,7 +282,7 @@ public class Player : MonoBehaviour
 		// check if player is being punched
 		if (other.gameObject.tag == "PunchArm") 
 		{
-			health -= 34; 
+			applyDamage(20);
 		}
     }
 

@@ -822,15 +822,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b00c09665c1264ca77aca879afa9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   Label: 
   heldItem: {fileID: 0}
-  footCollider: {fileID: 0}
   itemForce: 1000
   direction: 0
   playerNum: 1
-  moveSpeed: 10
   prevJumpTime: 0
   gulpSound: {fileID: 8300000, guid: 0ba19d64d8dd3044e96b8bdf6e377df1, type: 3}
+  punchSounds:
+  - {fileID: 8300000, guid: ec695a227fd311f47b5437eb24afe819, type: 3}
+  - {fileID: 8300000, guid: ca3da642e31e10c4c8db0b52ed311ef4, type: 3}
+  punchCooldown: 1
 --- !u!114 &114222657503782498
 MonoBehaviour:
   m_ObjectHideFlags: 1
