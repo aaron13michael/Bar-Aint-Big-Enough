@@ -255,9 +255,8 @@ public class Player : MonoBehaviour
 
 			int pSoundIndex = Random.Range (0, 1);
 
-			PlaySound (punchSounds[pSoundIndex], 0.6f);
+			PlaySound (punchSounds[pSoundIndex], 0.8f);
 			animator.SetTrigger ("Punch");
-			Debug.Log ("I punched");
 		}
 
 		animator.SetFloat ("xVelocity", rb.velocity.x);
@@ -291,7 +290,7 @@ public class Player : MonoBehaviour
 		// check if player is being punched
 		if (other.gameObject.tag == "Player" && isPunching) 
 		{
-			other.gameObject.GetComponent<Player>().applyDamage(20);
+			other.gameObject.GetComponent<Player>().applyDamage(Mathf.RoundToInt(15 * modifier));
 			currPCooldown = 0;
 			isPunching = false;
 		}
@@ -305,7 +304,6 @@ public class Player : MonoBehaviour
             {
                 other.gameObject.GetComponent<Collider2D>().isTrigger = true;
             }
-            Debug.Log("Within trigger");
         }
 
 		if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs") 
@@ -399,12 +397,7 @@ public class Player : MonoBehaviour
     {
 		dead = true;
 
-		if(hasPickup)
-		{
-			heldItem.transform.parent = null;
-			heldItem.AddComponent<Rigidbody2D>();
-		}
-
+		/*
 		if(audio.isPlaying)
 		{
 			Destroy (gameObject, audio.clip.length);	
@@ -412,7 +405,9 @@ public class Player : MonoBehaviour
 		else
 		{
 			Destroy(gameObject);
-		}
+		}*/
+
+		Destroy (gameObject);
 			
     }
 }

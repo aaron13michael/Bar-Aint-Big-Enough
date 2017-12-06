@@ -834,6 +834,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ec695a227fd311f47b5437eb24afe819, type: 3}
   - {fileID: 8300000, guid: ca3da642e31e10c4c8db0b52ed311ef4, type: 3}
   punchCooldown: 1
+  punchLength: 0.3
 --- !u!114 &114222657503782498
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -25,15 +25,17 @@ public class GameManager : MonoBehaviour
 		// if there are more than one player alive
 		else 
 		{
+			/*
 			// loop through the players
 			for (int i = 0; i < players.Count; i++) 
 			{
 				// if a player died remove them from the list
-				if (players [i].GetComponent<Player> ().health <= 0) 
+				if (players [i].GetComponent<Player>().health <= 0) 
 				{
 					players.RemoveAt (i);
 				}
 			}
+			*/
 		}
 	}
 }
