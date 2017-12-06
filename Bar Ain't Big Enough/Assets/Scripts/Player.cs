@@ -256,6 +256,8 @@ public class Player : MonoBehaviour
 			int pSoundIndex = Random.Range (0, 1);
 
 			PlaySound (punchSounds[pSoundIndex], 0.6f);
+			animator.SetTrigger ("Punch");
+			Debug.Log ("I punched");
 		}
 
 		animator.SetFloat ("xVelocity", rb.velocity.x);
