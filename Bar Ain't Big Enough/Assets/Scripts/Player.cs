@@ -42,8 +42,10 @@ public class Player : MonoBehaviour
 
 	//Punch variables
 	public float punchCooldown;
+	public float punchLength;
 	private float currPCooldown;
 	private bool isPunching;
+	private bool canPunch;
 	Transform punchArm;
 
     //UI Meters
@@ -128,14 +130,18 @@ public class Player : MonoBehaviour
 		}
 
 		//Update punch timer if currently punching
-		if (isPunching) 
+		if (currPCooldown < punchCooldown) 
 		{
 			currPCooldown += Time.deltaTime;
+		}
+		else 
+		{
+			canPunch = true;
+		}
 
-			if (currPCooldown >= punchCooldown) 
-			{
-				isPunching = false;
-			}
+		if (currPCooldown >= punchLength) 
+		{
+			isPunching = false;
 		}
 	}
 
@@ -239,12 +245,13 @@ public class Player : MonoBehaviour
 		}
 
 		//Punch
-		if (punch > 0.3f && !isPunching && !hasPickup) 
+		if (punch > 0.3f && canPunch && !hasPickup) 
 		{
-			isPunching = true;
 			//Animator stuff goes here
 			punchArm.tag = "PunchArm";
-			currPCooldown = 0f;
+			isPunching = true;
+			canPunch = false;
+			currPCooldown = 0;
 
 			int pSoundIndex = Random.Range (0, 1);
 
@@ -280,9 +287,11 @@ public class Player : MonoBehaviour
         }
 
 		// check if player is being punched
-		if (other.gameObject.tag == "PunchArm") 
+		if (other.gameObject.tag == "Player" && isPunching) 
 		{
-			applyDamage(20);
+			other.gameObject.GetComponent<Player>().applyDamage(20);
+			currPCooldown = 0;
+			isPunching = false;
 		}
     }
 
