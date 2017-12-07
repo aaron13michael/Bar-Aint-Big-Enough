@@ -401,7 +401,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1599849482399844, guid: d13101e3847918b42a46db4de0d3e0d4, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d13101e3847918b42a46db4de0d3e0d4, type: 2}
@@ -1320,6 +1320,8 @@ GameObject:
   - component: {fileID: 532405092}
   - component: {fileID: 532405091}
   - component: {fileID: 532405093}
+  - component: {fileID: 532405095}
+  - component: {fileID: 532405094}
   m_Layer: 0
   m_Name: Chandelier
   m_TagString: Terrain
@@ -1409,6 +1411,49 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.76, y: 0.41206884}
   m_EdgeRadius: 0
+--- !u!233 &532405094
+HingeJoint2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 532405090}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: -0.000000089883486, y: 6.715001}
+  m_ConnectedAnchor: {x: -2.36, y: 8.53}
+  m_UseMotor: 0
+  m_Motor:
+    m_MotorSpeed: 0
+    m_MaximumMotorForce: 10000
+  m_UseLimits: 1
+  m_AngleLimits:
+    m_LowerAngle: -180
+    m_UpperAngle: 360
+--- !u!50 &532405095
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 532405090}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 3.25
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &547134417
 GameObject:
   m_ObjectHideFlags: 0
