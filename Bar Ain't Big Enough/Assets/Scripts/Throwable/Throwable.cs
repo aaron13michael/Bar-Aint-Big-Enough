@@ -10,9 +10,6 @@ public class Throwable : MonoBehaviour {
     public int drunkCheck;
     public bool thrown = false;
 
-	// the bottles start on the ground
-	public bool onGround = true;
-
 	// Use this for initialization
 	public virtual void Start () {
 		
@@ -28,8 +25,6 @@ public class Throwable : MonoBehaviour {
 		// if the object is thrown
         if (thrown)
         {
-			// onGround is false
-			onGround = false;
 
 			// if the first object the thrown object hits is terrain
 			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs")
@@ -39,11 +34,10 @@ public class Throwable : MonoBehaviour {
             }
 
 			// if the first object the thrown bottle hits is a person and kills the person
-			if (other.gameObject.tag == "Player" && !onGround) 
+			if (other.gameObject.tag == "Player") 
 			{
 				Destroy (other.gameObject);
 				thrown = false;
-				onGround = true;
 			}
         }
         else

@@ -277,16 +277,6 @@ public class Player : MonoBehaviour
 			}
 		}
 
-        //Check if the stairs are below the player's feet.
-        if (other.gameObject.tag == "Stairs")
-        {
-            //If they aren't, allow player to walk 
-            if (!(gameObject.transform.position.y - gameObject.GetComponent<Collider2D>().bounds.size.y / 2 > other.gameObject.transform.position.y + other.gameObject.GetComponent<Collider2D>().bounds.size.y / 2))
-            {
-                other.gameObject.GetComponent<Collider2D>().isTrigger = true;
-            }
-        }
-
 		// check if player is being punched
 		if (other.gameObject.tag == "Player" && isPunching) 
 		{
