@@ -47,7 +47,7 @@ public class Bottle : Throwable {
 		if (thrown)
 		{
 			// if the first object the thrown bottle hits is terrain
-			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Wall" || other.gameObject.tag == "Bottle")
+			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Wall" || other.gameObject.tag == "Throwable")
 			{
 				thrown = false;
 				PlayBreak();

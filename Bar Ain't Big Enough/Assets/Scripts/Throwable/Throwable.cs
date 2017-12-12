@@ -40,11 +40,6 @@ public class Throwable : MonoBehaviour {
 				thrown = false;
 			}
         }
-        else
-        {
-			
-       
-        }
     }
 
 	//Destroys this item

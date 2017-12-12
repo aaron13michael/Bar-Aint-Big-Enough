@@ -4,30 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour 
 {
-	// player health
     public int health;
-
 	bool dead = false;
-
-	// checks if player is holding a pick up
-    bool hasPickup = false;
-
-    // True if drunkeness is increasing. False otherwise.
-    bool drunkApply = false;
 
 	public string Label;
 
-	// gameobject to store the held item
-    public GameObject heldItem;
-	// item force and direction
+	//Item variables
     public float itemForce = 0.0f;
     public int direction = 0; 
+	public GameObject heldItem;
+	public bool hasPickup = false; // checks if player is holding a pick up
 
 	// Is this player 1, 2, 3, or 4?
 	public int playerNum;
 
-	public float prevJumpTime; // the last time that jump was used
-
+	//Audio variables
 	private AudioSource audio;
 	public AudioClip gulpSound;
 	public AudioClip[] punchSounds;
@@ -35,10 +26,15 @@ public class Player : MonoBehaviour
 	private Rigidbody2D rb;
 	private Animator animator;
 
+	//Jump variables
 	private bool grounded;
+	public float prevJumpTime; // the last time that jump was used
+
+	//Drunk variables
 	private float drunkDecreaseCD; //time since the drunk meter last went down
 	private int drunkeness;
     private float modifier; //value for modifying throw strength and movement speed for being drunk
+	bool drunkApply = false;  // True if drunkeness is increasing. False otherwise.
 
 	//Punch variables
 	public float punchCooldown;
@@ -193,11 +189,11 @@ public class Player : MonoBehaviour
 
 				if(heldItem.transform.position.x > this.gameObject.transform.position.x)
 				{
-					heldItem.transform.position = this.transform.position + new Vector3(0.7f, -0.7f, 0.0f);		
+					heldItem.transform.position = this.transform.position + new Vector3(1.0f, -0.7f, 0.0f);		
 				}
 				else
 				{
-					heldItem.transform.position = this.transform.position + new Vector3(-0.7f, -0.7f, 0.0f);	
+					heldItem.transform.position = this.transform.position + new Vector3(-1.0f, -0.7f, 0.0f);	
 				}
 			}
 			else
@@ -222,7 +218,7 @@ public class Player : MonoBehaviour
 				
         }
         // Drink bottle
-        if(useBtn && hasPickup)
+		if(useBtn && hasPickup && heldItem.GetComponent<Bottle>() != null)
         {
             if (heldItem.GetComponent<Bottle>().bState == Bottle.BottleState.Full)
             {
@@ -267,7 +263,7 @@ public class Player : MonoBehaviour
     {
 		if (!hasPickup) 
 		{
-			if (other.gameObject.tag == "Bottle") 
+			if (other.gameObject.tag == "Throwable") 
 			{
 				hasPickup = true;
 				Destroy (other.rigidbody);

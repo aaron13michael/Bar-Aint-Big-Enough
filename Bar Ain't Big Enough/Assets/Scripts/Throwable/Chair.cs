@@ -25,11 +25,11 @@ public class Chair : Throwable
 
 	public override void OnCollisionEnter2D(Collision2D other)
 	{
-		// if the bottle is thrown
+		// if the object is thrown
 		if (thrown)
 		{
 			// if the first object the thrown chair hits is terrain
-			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Wall" || other.gameObject.tag == "Bottle")
+			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Wall" || other.gameObject.tag == "Throwable")
 			{
 				thrown = false;
 				Hit();
@@ -61,7 +61,12 @@ public class Chair : Throwable
 
 		if(currHits >= maxHits)
 		{
+			PlaySound(chairBreak);
 			DestroyThrowable();
+		}
+		else
+		{
+			PlaySound(chairHit);
 		}
 	}
 
