@@ -263,7 +263,7 @@ public class Player : MonoBehaviour
     {
 		if (!hasPickup) 
 		{
-			if (other.gameObject.tag == "Throwable") 
+			if (other.gameObject.tag == "Throwable" && drunkeness >= other.gameObject.GetComponent<Throwable>().drunkCheck) 
 			{
 				hasPickup = true;
 				Destroy (other.rigidbody);
