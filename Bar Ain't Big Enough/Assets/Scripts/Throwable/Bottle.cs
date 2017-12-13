@@ -46,11 +46,8 @@ public class Bottle : Throwable {
 		// if the bottle is thrown
 		if (thrown)
 		{
-			// onGround is false
-			onGround = false;
-
 			// if the first object the thrown bottle hits is terrain
-			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Stairs" || other.gameObject.tag == "Wall" || other.gameObject.tag == "Bottle")
+			if (other.gameObject.tag == "Terrain" || other.gameObject.tag == "Wall" || other.gameObject.tag == "Throwable")
 			{
 				thrown = false;
 				PlayBreak();
@@ -66,11 +63,10 @@ public class Bottle : Throwable {
 			}
 
 			// if the first object the thrown bottle hits is a person and kills the person
-			if (other.gameObject.tag == "Player" && !onGround) 
+			if (other.gameObject.tag == "Player") 
 			{
 				PlayBreak();
 				thrown = false;
-				onGround = true;
 
 				if(bState == BottleState.Broken)
 				{
@@ -100,15 +96,16 @@ public class Bottle : Throwable {
 
 	protected override void DestroyThrowable()
 	{
-/*		if(audio.isPlaying)
+		if(audio.isPlaying)
 		{
+			this.GetComponent<SpriteRenderer>().enabled = false;
+			this.GetComponent<PolygonCollider2D>().enabled = false;
+			Destroy(this.GetComponent<Rigidbody2D>());
 			Destroy (gameObject, audio.clip.length);	
 		}
 		else
 		{
 			Destroy(gameObject);
-		}*/
-
-		Destroy(gameObject);
+		}
 	}
 }
