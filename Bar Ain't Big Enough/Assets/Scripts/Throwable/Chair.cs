@@ -19,8 +19,9 @@ public class Chair : Throwable
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{
+		gameObject.transform.rotation = new Quaternion (0.0f, 0.0f, 0.0f, 0.0f); // Keeps the chair from rotation along the Z axis
 	}
 
 	public override void OnCollisionEnter2D(Collision2D other)
