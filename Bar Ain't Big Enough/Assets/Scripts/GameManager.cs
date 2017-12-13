@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		
+  
 	}
 	
 	// Update is called once per frame
@@ -54,7 +55,8 @@ public class GameManager : MonoBehaviour
 		{
 			// retrieve the player pref for winner
 			string winner = PlayerPrefs.GetString("Winner");
-			Debug.Log (winner);
+            Text winText = GameObject.Find("WinnerText").transform.GetComponent<Text>();
+            winText.text = winner;
 
 			// modify the text of GUI elment to display the player pref
 		}
