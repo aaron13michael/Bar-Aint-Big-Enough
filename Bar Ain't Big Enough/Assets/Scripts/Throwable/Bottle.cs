@@ -68,16 +68,12 @@ public class Bottle : Throwable {
 				PlayBreak();
 				thrown = false;
 
-				if(bState == BottleState.Broken)
+				if(bState == BottleState.Full)
 				{
-					DestroyThrowable();
+                    other.gameObject.GetComponent<Player>().applyDrunk(15);
 				}
-				else
-				{
-					bState = BottleState.Broken;
-				}
-
-				other.gameObject.GetComponent<Player>().applyDamage(50);
+                DestroyThrowable();
+                other.gameObject.GetComponent<Player>().applyDamage((int)(15 * modifier));
 			}
 		}
 	}

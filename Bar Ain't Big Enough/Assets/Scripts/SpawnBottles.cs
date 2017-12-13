@@ -26,7 +26,19 @@ public class SpawnBottles : MonoBehaviour {
 		if (timer > spawnTime)
         {
             int random = Random.Range(0, spawnLocations.Length);
-            Instantiate(bottle, spawnLocations[random].GetComponent<Transform>().position, Quaternion.identity);
+            GameObject newBottle = Instantiate(bottle, spawnLocations[random].GetComponent<Transform>().position, Quaternion.identity);
+            if (random == 0)
+            {
+                newBottle.GetComponent<Rigidbody2D>().AddForce(new Vector2(-300.0f, 0.0f));
+            }
+            else if (random == 1)
+            {
+                newBottle.GetComponent<Rigidbody2D>().AddForce(new Vector2(350.0f, 0.0f));
+            }
+            else
+            {
+                newBottle.GetComponent<Bottle>().bState = Bottle.BottleState.Empty;
+            }
             timer = 0.0f;
         }
     }

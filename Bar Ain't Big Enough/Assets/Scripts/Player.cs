@@ -213,7 +213,8 @@ public class Player : MonoBehaviour
 
 				heldItem.AddComponent<Rigidbody2D>();
 				heldItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(itemForce * modifier * xAxis, itemForce * modifier * yAxis));
-				heldItem.GetComponent<Throwable>().thrown = true;	
+				heldItem.GetComponent<Throwable>().thrown = true;
+                heldItem.GetComponent<Throwable>().modifier = modifier;
 			}
 				
         }
@@ -360,7 +361,7 @@ public class Player : MonoBehaviour
     /// Set the level of drunkeness for a player
     /// </summary>
     /// <param name="amount">New value of the player's drunkeness out of 1000</param>
-    void applyDrunk(int amount)
+    public void applyDrunk(int amount)
     {
         drunkeness = drunkeness + amount < 100 ? drunkeness + amount : 100;
         drunkApply = true;

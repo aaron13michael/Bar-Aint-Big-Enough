@@ -40,7 +40,7 @@ public class Chair : Throwable
 			{
 				thrown = false;
 				Hit();
-				other.gameObject.GetComponent<Player>().applyDamage(30);
+				other.gameObject.GetComponent<Player>().applyDamage((int)(30 * modifier));
 			}
 		}
 	}

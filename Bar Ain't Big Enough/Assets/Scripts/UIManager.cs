@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
 		//uses the p button to pause and unpause the game
 		// added by Niko
 		
-		if (Input.GetKeyDown (KeyCode.P) && !gameover) {
+		/*if (Input.GetKeyDown (KeyCode.P) && !gameover) {
 			if (!paused) {
 				showPaused ();
 				paused = true;
@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
 				hidePaused ();
 				paused = false;
 			}
-		}
+		}*/
         // Kill Switch until win state is implemented
         if (Input.GetKeyDown(KeyCode.K))
         {

@@ -8,11 +8,11 @@ public class Throwable : MonoBehaviour {
     public int weight;
     //Alcohol requirement for the object to be picked up.
     public int drunkCheck;
+    public float modifier;
     public bool thrown = false;
 
 	// Use this for initialization
 	public virtual void Start () {
-		
 	}
 	
 	// Update is called once per frame
