@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 
 			// UI Meter
             //Slowly decrease drunkeness level
-            if (drunkMeter.transform.childCount > 0 && !drunkApply && drunkDecreaseCD >= 0.5f)
+            if (drunkMeter.transform.childCount > 0 && !drunkApply && drunkDecreaseCD >= 0.7f)
             {
                 Destroy(drunkMeter.transform.GetChild(drunkeness - 1).gameObject);
                 drunkDecreaseCD = 0;
